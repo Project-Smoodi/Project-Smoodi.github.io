@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>Main Page</title>
-    <script src="utility.js" type="javascript"></script>
+    <script src="utility.js" type="module"></script>
 </head>
 <body>
 
-
     <script>
+        import {firstOrSecondIfNull} from "./utility";
+
         const dataFilePath = location.pathname + "data.json";
         let data = getData();
         const language = firstOrSecondIfNull(new URL(location.href).searchParams.get("lang"), "ko");

@@ -1,4 +1,4 @@
-function firstOrSecondIfNull(first, second) {
+export function firstOrSecondIfNull(first, second) {
     if (first == null) {
         return second;
     }
