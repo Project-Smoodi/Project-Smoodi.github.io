@@ -1,8 +1,9 @@
 import {applyLanguageConfig, getUserLanguage} from "./language.js";
 
-const main = document.getElementById("main");
+let main;
 
 export function loadContents() {
+    main = document.getElementById("main");
     const dataFilePath = location.pathname + "contents.html";
     let data = getData(dataFilePath);
 
