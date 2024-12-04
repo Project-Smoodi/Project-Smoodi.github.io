@@ -41,4 +41,6 @@ export function applyLanguageConfig() {
             it.remove();
         }
     })
+
+    console.log("Language config applied.");
 }
