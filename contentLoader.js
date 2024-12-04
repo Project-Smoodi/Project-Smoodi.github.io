@@ -1,13 +1,11 @@
-import {applyLanguageConfig, getUserLanguage} from "./language.js";
+import {applyLanguageConfig} from "./language.js";
 
-let main;
+const main = document.querySelector("main");
 
 export function loadContents() {
-    main = document.getElementById("main");
+
     const dataFilePath = location.pathname + "contents.html";
     let data = getData(dataFilePath);
-
-    console.log(dataFilePath, getUserLanguage());
 
     data.then((value) => {
         if (value === undefined) {
