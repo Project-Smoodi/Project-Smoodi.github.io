@@ -3,62 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Main Page</title>
-    <script src="utility.js" type="javascript"></script>
 </head>
 <body>
 
-
-    <script>
-        const dataFilePath = location.pathname + "data.json";
-        let data = getData();
-        const language = firstOrSecondIfNull(new URL(location.href).searchParams.get("lang"), "ko");
-
-        console.log(dataFilePath, language);
-
-        data.then((value) => {
-            if (data === undefined) {
-                notfound();
-            } else if (data == null) {
-                languageUnsupported();
-            }
-        })
-
-        async function getData() {
-            let data = "";
-
-            await fetch(dataFilePath)
-                    .then((response) => response.json())
-                    .then((json) => {
-                        if (language === "ko") {
-                            data = json.ko;
-                        } else {
-                            data = json.en;
-                        }
-                    })
-                    .catch((error) => {
-                        data = undefined;
-                    })
-
-            return data;
-        }
-
-        function notfound() {
-            main = document.querySelector("main");
-
-            if (language === "ko") {
-                main.textContent = error("nono", "nn");
-            }
-        }
-
-        function languageUnsupported() {
-        }
-
-        function error(title, subtitle) {
-            return "<div style=\"width: 100%; height: 100%; display: flex; flex-direction: column; gap: 30px; justify-content: center; align-items: center;\">" +
-                    `<p style=\"font-size: 32px;\">${title}</p>` +
-                    `<p style=\"font-size: 18px;\">${subtitle}</p>` +
-                    "</div>"
-        }
+    <script src="contentLoader.js" type="javascript">
+        loadContents();
     </script>
 </body>
 </html>
