@@ -31,7 +31,11 @@ async function getData(dataFilePath) {
         .then((response) => response.text()
             .then((value) => {
                 data = value;
-            }))
+            })
+            .catch((error) => {
+                data = undefined;
+            })
+        )
         .catch((error) => {
             data = undefined;
         })
