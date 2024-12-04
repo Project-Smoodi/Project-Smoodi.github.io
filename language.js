@@ -14,8 +14,6 @@ export function getUserLanguage() {
         );
 
         redirectIfUnsupportedLanguage();
-
-        document.querySelector("html").lang = lang;
     }
 
     return lang;
