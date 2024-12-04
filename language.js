@@ -1,19 +1,41 @@
+import {firstOrSecondIfNull} from "/utility.js";
+
 export const SUPPORT_LANGUAGES = ["ko", "en"];
 export const DEFAULT_LANGUAGE = "ko"
 export const LANGUAGE_CONFIG_PARAM_NAME = "lang"
 
-export function redirectIfUnsupportedLanguage(language) {
-    if (!SUPPORT_LANGUAGES.includes(language)) {
+let lang = undefined;
+
+export function getUserLanguage() {
+    if (lang === undefined) {
+        lang = firstOrSecondIfNull(
+            new URL(location.href).searchParams.get(LANGUAGE_CONFIG_PARAM_NAME),
+            DEFAULT_LANGUAGE
+        );
+
+        redirectIfUnsupportedLanguage();
+
+        document.querySelector("html").lang = lang;
+    }
+
+    return lang;
+}
+
+function redirectIfUnsupportedLanguage() {
+    if (!SUPPORT_LANGUAGES.includes(lang)) {
         const url = new URL(location.href);
         url.searchParams.set(LANGUAGE_CONFIG_PARAM_NAME, DEFAULT_LANGUAGE);
-        console.log(location.href, url.toString());
+        location.href = url.toString();
     }
 }
 
-export function applyLanguageConfig(language) {
-    const otherLanguages = SUPPORT_LANGUAGES.filter(lang => lang !== language);
+export function applyLanguageConfig() {
+    const otherLanguages = SUPPORT_LANGUAGES.filter(item => item !== lang);
 
-    otherLanguages.forEach(lang => {
-        document.querySelector(lang).remove();
+    otherLanguages.forEach(item => {
+        const it = document.querySelector(item);
+        if (it != null) {
+            it.remove();
+        }
     })
 }

@@ -1,23 +1,10 @@
-import {firstOrSecondIfNull} from "utility.js";
-import {
-    applyLanguageConfig,
-    DEFAULT_LANGUAGE,
-    LANGUAGE_CONFIG_PARAM_NAME,
-    redirectIfUnsupportedLanguage
-} from "./language";
+import {applyLanguageConfig, getUserLanguage} from "./language.js";
 
 export function loadContents() {
-    console.log("function")
     const dataFilePath = location.pathname + "contents.html";
-    let data = getData();
-    const language = firstOrSecondIfNull(
-        new URL(location.href).searchParams.get(LANGUAGE_CONFIG_PARAM_NAME),
-        DEFAULT_LANGUAGE);
+    let data = getData(dataFilePath);
 
-    redirectIfUnsupportedLanguage();
-    applyLanguageConfig()
-
-    console.log(dataFilePath, language);
+    console.log(dataFilePath, getUserLanguage());
 
     data.then((value) => {
         if (value === undefined) {
@@ -28,12 +15,16 @@ export function loadContents() {
 
         const main = document.querySelector("main");
 
-        main.textContent = value;
+        console.log(value)
+
+        main.innerHTML = value;
+
+        applyLanguageConfig();
     })
 }
 
 
-async function getData() {
+async function getData(dataFilePath) {
     let data = "";
 
     await fetch(dataFilePath)
@@ -50,11 +41,6 @@ async function getData() {
 
 function notfound() {
     let main = document.querySelector("main");
-
-    if (language === "ko") {
-        main.textContent = error("nono", "nn");
-    } else if (language === "en") {
-    }
 }
 
 function languageUnsupported() {

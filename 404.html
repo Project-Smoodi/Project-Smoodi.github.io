@@ -3,10 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <title>Main Page</title>
+    <script src="/contentLoader.js" type="module"></script>
+    <script src="/language.js" type="module"></script>
+    <script src="/utility.js" type="module"></script>
 </head>
 <body>
 
-    <script src="contentLoader.js" type="javascript">
+    <main></main>
+
+    <script type="module">
+        import {loadContents} from "/contentLoader.js";
+
         loadContents();
     </script>
 </body>
