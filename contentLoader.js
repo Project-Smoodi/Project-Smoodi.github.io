@@ -1,5 +1,7 @@
 import {applyLanguageConfig, getUserLanguage} from "./language.js";
 
+const main = document.getElementById("main");
+
 export function loadContents() {
     const dataFilePath = location.pathname + "contents.html";
     let data = getData(dataFilePath);
@@ -13,16 +15,15 @@ export function loadContents() {
             languageUnsupported();
         }
 
-        const main = document.querySelector("main");
-
-        console.log(value)
-
         main.innerHTML = value;
 
-        applyLanguageConfig();
+        try {
+            applyLanguageConfig();
+        } catch (error) {
+            languageUnsupported();
+        }
     })
 }
-
 
 async function getData(dataFilePath) {
     let data = "";
@@ -40,7 +41,11 @@ async function getData(dataFilePath) {
 }
 
 function notfound() {
-    let main = document.querySelector("main");
+    getData("/error/notfound.html")
+        .then((value) => {
+            main.innerHTML = value;
+            applyLanguageConfig();
+        })
 }
 
 function languageUnsupported() {

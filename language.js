@@ -30,6 +30,11 @@ function redirectIfUnsupportedLanguage() {
 }
 
 export function applyLanguageConfig() {
+
+    if (document.querySelector(lang) == null) {
+        throw new DOMException("Selected language is not supported on this document.");
+    }
+
     const otherLanguages = SUPPORT_LANGUAGES.filter(item => item !== lang);
 
     otherLanguages.forEach(item => {
