@@ -1,13 +1,12 @@
 import {applyLanguageConfig} from "./language.js";
 
-const main = document.querySelector("main");
+let main;
 
-export function loadContents() {
+export async function loadContents() {
+    main = document.querySelector("main");
+    const dataFilePath = location.pathname + "content.html";
 
-    const dataFilePath = location.pathname + "contents.html";
-    let data = getData(dataFilePath);
-
-    data.then((value) => {
+    await getData(dataFilePath).then((value) => {
         if (value === undefined) {
             notfound();
         } else if (value == null) {
@@ -16,12 +15,50 @@ export function loadContents() {
 
         main.innerHTML = value;
 
-        try {
-            applyLanguageConfig();
-        } catch (error) {
-            languageUnsupported();
-        }
+        applyLanguageConfig();
     })
+}
+
+async function notfound() {
+    await setHTMLContent("/error/notfound.html", "main", "tag");
+}
+
+export async function languageUnsupported() {
+    await setHTMLContent("/error/languageUnsupported.html", "main", "tag");
+}
+
+export async function loadCustomTag(tagName, locationTargetKey, keyType, postFunc) {
+    await getData("/tag/" + tagName + "/content.html")
+        .then((value) => {
+            appendContent(value, locationTargetKey, keyType);
+            postFunc();
+        })
+}
+
+export async function setHTMLContent(fileName, locationTargetKey, keyType) {
+    await getData(fileName)
+        .then((value) => {
+            setContent(value, locationTargetKey, keyType);
+        })
+}
+
+export function appendContent(content, locationTargetKey, keyType) {
+    if (keyType === "id") {
+        const element = document.getElementById(locationTargetKey);
+        element.innerHTML = element.innerHTML + content;
+    } else if (keyType === "tag") {
+        const element = document.querySelector(locationTargetKey);
+        element.innerHTML = element.innerHTML + content;
+    }
+    applyLanguageConfig();
+}
+
+export function setContent(content, locationTargetKey, keyType) {
+    if (keyType === "id") {
+        document.getElementById(locationTargetKey).innerHTML = content;
+    } else if (keyType === "tag") {
+        document.querySelector(locationTargetKey).innerHTML = content;
+    }
 }
 
 async function getData(dataFilePath) {
@@ -41,22 +78,4 @@ async function getData(dataFilePath) {
         })
 
     return data;
-}
-
-function notfound() {
-    getData("/error/notfound.html")
-        .then((value) => {
-            main.innerHTML = value;
-            applyLanguageConfig();
-        })
-}
-
-function languageUnsupported() {
-}
-
-function error(title, subtitle) {
-    return "<div style=\"width: 100%; height: 100%; display: flex; flex-direction: column; gap: 30px; justify-content: center; align-items: center;\">" +
-        `<p style=\"font-size: 32px;\">${title}</p>` +
-        `<p style=\"font-size: 18px;\">${subtitle}</p>` +
-        "</div>"
 }

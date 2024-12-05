@@ -1,0 +1,45 @@
+.sidebar {
+    position: fixed;
+    right: 3%;
+    top: 120px;
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: start;
+    align-items: start;
+
+    height: 50%;
+    max-width: 15%;
+    padding: 3%;
+    border-radius: 10px;
+    gap: 20px;
+
+    overflow-y: scroll;
+
+    background-color: #222222;
+}
+
+.sidebar::-webkit-scrollbar {
+    width: 20px;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 50%);
+    width: 10px;
+
+    border: 5px solid #222;
+    border-radius: 10px;
+}
+
+.sidebar::-webkit-scrollbar-button, .sidebar::-webkit-scrollbar-corner {
+    visibility: hidden;
+}
+
+.sidebar-text {
+    transition: 0.5s;
+}
+
+.sidebar-text:hover {
+    transform: translateX(-5px);
+}

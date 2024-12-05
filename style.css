@@ -1,7 +1,61 @@
+html, body {
+    display: flex;
+    flex-direction: column;
 
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    align-items: center;
+    gap: 100px;
+
+    background-color: #333333;
+
+    scroll-behavior: smooth;
+}
+
+html::-webkit-scrollbar {
+    width: 20px;
+}
+
+html::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 20%);
+    width: 10px;
+
+    border: 5px solid #333;
+    border-radius: 10px;
+}
+
+html::-webkit-scrollbar-track, html::-webkit-scrollbar-button, .sidebar::-webkit-scrollbar-corner {
+    visibility: hidden;
+}
+
+main {
+    padding: 100px 0 200px 0;
+    width: 45%;
+}
+
+main ko, main en {
+    display: flex;
+    flex-direction: column;
+
+    align-items: start;
+    justify-content: center;
+    gap: 20px;
+}
+
+.content {
+    display: flex;
+    flex-direction: row;
+
+    width: 100%;
+    min-height: 100vw;
+    justify-content: space-between;
+    align-items: start;
+}
 
 .error {
     display: flex;
+    flex-direction: column;
 
     width: 100%;
     height: 100%;

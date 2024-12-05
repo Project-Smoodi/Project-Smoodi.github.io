@@ -20,20 +20,13 @@ export function getUserLanguage() {
 }
 
 function redirectIfUnsupportedLanguage() {
-    if (!SUPPORT_LANGUAGES.includes(lang)) {
-        const url = new URL(location.href);
-        url.searchParams.set(LANGUAGE_CONFIG_PARAM_NAME, DEFAULT_LANGUAGE);
-        location.href = url.toString();
+    if (!SUPPORT_LANGUAGES.includes(getUserLanguage())) {
+        setLanguage(DEFAULT_LANGUAGE);
     }
 }
 
 export function applyLanguageConfig() {
-
-    if (document.querySelector(lang) == null) {
-        throw new DOMException("Selected language is not supported on this document.");
-    }
-
-    const otherLanguages = SUPPORT_LANGUAGES.filter(item => item !== lang);
+    const otherLanguages = SUPPORT_LANGUAGES.filter(item => item !== getUserLanguage());
 
     otherLanguages.forEach(item => {
         const it = document.querySelector(item);
@@ -42,5 +35,19 @@ export function applyLanguageConfig() {
         }
     })
 
-    console.log("Language config applied.");
+    console.log("Language config applied: " + getUserLanguage());
+}
+
+export function changeLanguage() {
+    if (getUserLanguage() === "ko") {
+        setLanguage("en");
+    } else {
+        setLanguage("ko")
+    }
+}
+
+export function setLanguage(language) {
+    const url = new URL(location.href);
+    url.searchParams.set(LANGUAGE_CONFIG_PARAM_NAME, language);
+    location.href = url.toString();
 }

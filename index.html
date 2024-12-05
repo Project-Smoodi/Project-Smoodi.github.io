@@ -2,20 +2,50 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Main Page</title>
+
     <link href="/style.css" rel="stylesheet">
+    <link href="/font.css" rel="stylesheet">
+    <link href="/animation.css" rel="stylesheet">
+    <link href="/tag/header/style.css" rel="stylesheet">
+    <link href="/tag/sidebar/style.css" rel="stylesheet">
+
     <script src="/contentLoader.js" type="module"></script>
     <script src="/language.js" type="module"></script>
     <script src="/utility.js" type="module"></script>
+    <script src="/tag/header/script.js" type="module"></script>
+    <script src="/tag/sidebar/script.js" type="module"></script>
+
+    <script type="module">
+        import {changeLanguage} from "/language.js";
+
+        function onHeaderLanguageChange() {
+            changeLanguage();
+        }
+    </script>
 </head>
 <body>
 
+    <aside class="sidebar">
+        <p class="sidebar-text" style="font-size: 24px">목차</p>
+    </aside>
+
+    <header></header>
+    <script type="module" defer>
+        import {loadCustomTag} from "/contentLoader.js";
+        import {script} from "/tag/header/script.js";
+
+        await loadCustomTag("header", "header", "tag", script);
+    </script>
+
     <main></main>
 
-    <script type="module">
+    <script type="module" defer>
         import {loadContents} from "/contentLoader.js";
+        import {loadSidebarContents} from "/tag/sidebar/script.js";
 
-        loadContents();
+        await loadContents();
+
+        loadSidebarContents()
     </script>
 </body>
 </html>
