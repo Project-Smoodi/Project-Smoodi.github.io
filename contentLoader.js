@@ -6,17 +6,16 @@ export async function loadContents() {
     main = document.querySelector("main");
     const dataFilePath = location.pathname + "content.html";
 
-    await getData(dataFilePath).then((value) => {
-        if (value === undefined) {
-            notfound();
-        } else if (value == null) {
-            languageUnsupported();
-        }
+    await getData(dataFilePath)
+        .then((value) => {
+            if (value === undefined) {
+                notfound();
+            }
 
-        main.innerHTML = value;
+            main.innerHTML = value;
 
-        applyLanguageConfig();
-    })
+            applyLanguageConfig();
+        })
 }
 
 async function notfound() {
@@ -65,17 +64,16 @@ async function getData(dataFilePath) {
     let data = "";
 
     await fetch(dataFilePath)
-        .then((response) => response.text()
-            .then((value) => {
-                data = value;
-            })
-            .catch((error) => {
-                data = undefined;
-            })
+        .then((response) => {
+                if (response.status === 404) {
+                    data = undefined;
+                } else {
+                    response.text().then((value) => {
+                        data = value;
+                    })
+                }
+            }
         )
-        .catch((error) => {
-            data = undefined;
-        })
 
     return data;
 }
