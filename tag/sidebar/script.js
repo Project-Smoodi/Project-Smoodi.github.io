@@ -1,6 +1,12 @@
+import {applyLanguageConfig} from "/language.js";
+
 export function loadSidebarContents() {
     const titles = document.querySelectorAll(".title");
     const sidebar = document.querySelector(".sidebar");
+
+    if (sidebar == null) {
+        return;
+    }
 
     titles.forEach((title, key) => {
         title.id = "title-" + key;

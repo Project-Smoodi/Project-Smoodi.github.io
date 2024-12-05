@@ -2,6 +2,8 @@ import {applyLanguageConfig} from "./language.js";
 
 let main;
 
+let errored = false;
+
 export async function loadContents() {
     main = document.querySelector("main");
     const dataFilePath = location.pathname + "content.html";
@@ -10,6 +12,7 @@ export async function loadContents() {
         .then((value) => {
             if (value === undefined) {
                 notfound();
+                errored = true;
             }
 
             main.innerHTML = value;
@@ -40,6 +43,7 @@ export async function setHTMLContent(fileName, locationTargetKey, keyType) {
             console.log(value)
             setContent(value, locationTargetKey, keyType);
         })
+    applyLanguageConfig();
 }
 
 export function appendContent(content, locationTargetKey, keyType) {
