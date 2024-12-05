@@ -37,6 +37,7 @@ export async function loadCustomTag(tagName, locationTargetKey, keyType, postFun
 export async function setHTMLContent(fileName, locationTargetKey, keyType) {
     await getData(fileName)
         .then((value) => {
+            console.log(value)
             setContent(value, locationTargetKey, keyType);
         })
 }
@@ -64,20 +65,21 @@ async function getData(dataFilePath) {
     let data = "";
 
     await fetch(dataFilePath)
-        .then((response) => {
+        .then(await inner);
+
+    return data;
+
+    async function inner(response) {
+        if (response.status === 404) {
+            data = undefined;
+        } else {
+            await response.text().then((value) => {
                 if (response.status === 404) {
                     data = undefined;
                 } else {
-                    response.text().then((value) => {
-                        if (response.status === 404) {
-                            data = undefined;
-                        } else {
-                            data = value;
-                        }
-                    })
+                    data = value;
                 }
-            }
-        )
-
-    return data;
+            })
+        }
+    }
 }

@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <title>Project Smoodi</title>
 
     <link href="/style.css" rel="stylesheet">
     <link href="/font.css" rel="stylesheet">
@@ -26,12 +27,11 @@
     <main></main>
 
     <script type="module" defer>
-        import {loadCustomTag} from "/contentLoader.js";
-        import {script} from "/tag/header/script.js";
-        import {loadContents} from "/contentLoader.js";
+        import {loadContents, loadCustomTag} from "/contentLoader.js";
+        import {loadHeader} from "/tag/header/script.js";
         import {loadSidebarContents} from "/tag/sidebar/script.js";
 
-        await loadCustomTag("header", "header", "tag", script);
+        await loadCustomTag("header", "header", "tag", loadHeader);
 
         await loadContents();
 
