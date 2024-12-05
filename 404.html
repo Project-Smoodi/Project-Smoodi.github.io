@@ -14,14 +14,6 @@
     <script src="/utility.js" type="module"></script>
     <script src="/tag/header/script.js" type="module"></script>
     <script src="/tag/sidebar/script.js" type="module"></script>
-
-    <script type="module">
-        import {changeLanguage} from "/language.js";
-
-        function onHeaderLanguageChange() {
-            changeLanguage();
-        }
-    </script>
 </head>
 <body>
 
@@ -30,18 +22,16 @@
     </aside>
 
     <header></header>
-    <script type="module" defer>
-        import {loadCustomTag} from "/contentLoader.js";
-        import {script} from "/tag/header/script.js";
-
-        await loadCustomTag("header", "header", "tag", script);
-    </script>
 
     <main></main>
 
     <script type="module" defer>
+        import {loadCustomTag} from "/contentLoader.js";
+        import {script} from "/tag/header/script.js";
         import {loadContents} from "/contentLoader.js";
         import {loadSidebarContents} from "/tag/sidebar/script.js";
+
+        await loadCustomTag("header", "header", "tag", script);
 
         await loadContents();
 
