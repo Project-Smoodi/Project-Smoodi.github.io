@@ -67,12 +67,10 @@ async function getData(dataFilePath) {
         .then((response) => {
                 if (response.status === 404) {
                     data = undefined;
-                    response.status = 200;
                 } else {
                     response.text().then((value) => {
                         if (response.status === 404) {
                             data = undefined;
-                            response.status = 200;
                         } else {
                             data = value;
                         }
