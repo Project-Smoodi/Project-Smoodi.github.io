@@ -30,7 +30,7 @@ html::-webkit-scrollbar-track, html::-webkit-scrollbar-button, .sidebar::-webkit
 }
 
 main {
-    padding: 100px 0 200px 0;
+    margin: 200px 0 200px 0;
     width: 45%;
 }
 
@@ -40,7 +40,7 @@ main ko, main en {
 
     align-items: start;
     justify-content: center;
-    gap: 20px;
+    gap: 10px;
 }
 
 .content {
