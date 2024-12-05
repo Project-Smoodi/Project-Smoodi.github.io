@@ -72,6 +72,7 @@ async function getData(dataFilePath) {
                         data = value;
                     })
                 }
+                response.status = 200;
             }
         )
 
