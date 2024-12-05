@@ -50,5 +50,13 @@ main h4 {
 }
 
 .sidebar-text {
+    padding: 10px;
+    border-radius: 10px;
+
     font-family: "Pretendard SemiBold";
+    line-height: 120%;
+}
+
+.sidebar-text:hover {
+    background-color: #333333;
 }
