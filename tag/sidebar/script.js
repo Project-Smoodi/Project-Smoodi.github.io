@@ -27,6 +27,6 @@ function scrollToTarget(event) {
     const targetElement = document.querySelector(event.target.href);
     targetElement.scrollIntoView({
         behavior: "smooth",
-        block: "nearest"
+        block: "center"
     });
 }
