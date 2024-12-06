@@ -18,7 +18,6 @@ export async function loadContents() {
         main.innerHTML = value;
 
         applyLanguageConfig();
-
     })
 
     await loadCustomTags()
@@ -35,6 +34,22 @@ export async function setHTMLContent(fileName, locationTargetKey, keyType) {
         })
 }
 
+export function setContent(content, locationTargetKey, keyType) {
+    if (keyType === "id") {
+        document.getElementById(locationTargetKey).innerHTML = content;
+    } else if (keyType === "tag") {
+        document.querySelector(locationTargetKey).innerHTML = content;
+    }
+    applyLanguageConfig();
+}
+
+export async function appendHTMLContent(fileName, locationTargetKey, keyType) {
+    await getData(fileName)
+        .then((value) => {
+            appendContent(value, locationTargetKey, keyType);
+        })
+}
+
 export function appendContent(content, locationTargetKey, keyType) {
     if (keyType === "id") {
         const element = document.getElementById(locationTargetKey);
@@ -46,11 +61,20 @@ export function appendContent(content, locationTargetKey, keyType) {
     applyLanguageConfig();
 }
 
-export function setContent(content, locationTargetKey, keyType) {
+export async function insertHTMLContentFront(fileName, locationTargetKey, keyType) {
+    await getData(fileName)
+        .then((value) => {
+            insertContentFront(value, locationTargetKey, keyType);
+        })
+}
+
+export function insertContentFront(content, locationTargetKey, keyType) {
     if (keyType === "id") {
-        document.getElementById(locationTargetKey).innerHTML = content;
+        const element = document.getElementById(locationTargetKey);
+        element.innerHTML = content + element.innerHTML;
     } else if (keyType === "tag") {
-        document.querySelector(locationTargetKey).innerHTML = content;
+        const element = document.querySelector(locationTargetKey);
+        element.innerHTML = content + element.innerHTML;
     }
     applyLanguageConfig();
 }
