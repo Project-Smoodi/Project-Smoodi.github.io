@@ -8,17 +8,24 @@ export async function loadContents() {
     main = document.querySelector("main");
     const dataFilePath = location.pathname + "content.html";
 
-    await getData(dataFilePath)
-        .then((value) => {
-            if (value === undefined) {
-                notfound();
-                errored = true;
-            }
+    await getData(dataFilePath).then(await async function (value) {
+        if (value === undefined) {
+            await notfound();
+            errored = true;
+        }
 
-            main.innerHTML = value;
+        main.innerHTML = value;
 
-            applyLanguageConfig();
-        })
+        applyLanguageConfig();
+
+        if (document.querySelector("unsupported") != null) {
+            await languageUnsupported();
+        }
+
+        if (document.querySelector("sidebar") != null) {
+            await setHTMLContent("/tag/sidebar/content.html", "sidebar", "tag")
+        }
+    })
 }
 
 async function notfound() {
@@ -26,7 +33,7 @@ async function notfound() {
 }
 
 export async function languageUnsupported() {
-    await setHTMLContent("/error/languageUnsupported.html", "main", "tag");
+    await setHTMLContent("/error/unsupported-language.html", "main", "tag");
 }
 
 export async function loadCustomTag(tagName, locationTargetKey, keyType, postFunc) {
@@ -40,7 +47,6 @@ export async function loadCustomTag(tagName, locationTargetKey, keyType, postFun
 export async function setHTMLContent(fileName, locationTargetKey, keyType) {
     await getData(fileName)
         .then((value) => {
-            console.log(value)
             setContent(value, locationTargetKey, keyType);
         })
     applyLanguageConfig();
@@ -69,21 +75,23 @@ async function getData(dataFilePath) {
     let data = "";
 
     await fetch(dataFilePath)
-        .then(await inner);
+        .then(await async function (response) {
+            if (response.status === 404) {
+                data = undefined;
+            } else {
+                await response.text().then((value) => {
+                    if (response.status === 404) {
+                        data = undefined;
+                    } else {
+                        data = value;
+                    }
+                })
+            }
+        });
 
     return data;
 
     async function inner(response) {
-        if (response.status === 404) {
-            data = undefined;
-        } else {
-            await response.text().then((value) => {
-                if (response.status === 404) {
-                    data = undefined;
-                } else {
-                    data = value;
-                }
-            })
-        }
+
     }
 }

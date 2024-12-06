@@ -1,8 +1,6 @@
-import {applyLanguageConfig} from "/language.js";
-
 export function loadSidebarContents() {
     const titles = document.querySelectorAll(".title");
-    const sidebar = document.querySelector(".sidebar");
+    const sidebar = document.querySelector("sidebar");
 
     if (sidebar == null) {
         return;
@@ -15,6 +13,8 @@ export function loadSidebarContents() {
         sidebarContent.className += "sidebar-text";
         sidebarContent.innerHTML = title.innerHTML;
         sidebarContent.href = "#" + title.id;
+
+        sidebarContent.style.marginLeft = (title.tagName.slice(1) - 1) * 10 + "px";
 
         sidebarContent.addEventListener("click", scrollToTarget)
 
