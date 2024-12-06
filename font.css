@@ -1,6 +1,11 @@
 * {
+    padding: 0;
+    margin: 0;
+
     font-family: "Pretendard";
+    font-size: 16px;
     color: #eeeeee;
+    white-space: normal;
 }
 
 ol {
@@ -12,12 +17,8 @@ ol, ul {
 }
 
 p, a, li, p * {
-    padding: 0;
-    margin: 0;
 
     height: min-content;
-
-    white-space: normal;
 }
 
 p strong {
@@ -34,12 +35,12 @@ main li::marker {
 }
 
 main h1 {
-    margin-top: 40px;
+    margin: 40px 0 20px 0;
     font-size: 36px;
 }
 
 main h2 {
-    margin-top: 40px;
+    margin: 40px 0 20px 0;
     font-size: 30px;
 }
 
