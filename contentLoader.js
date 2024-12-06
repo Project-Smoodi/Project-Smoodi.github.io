@@ -24,7 +24,7 @@ export async function loadContents() {
 }
 
 async function notfound() {
-    await setHTMLContent("/error/notfound.html", "main", "tag");
+    await setHTMLContent("/error/notfound.html", "main");
 }
 
 export async function setHTMLContent(fileName, selectors) {
