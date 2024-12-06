@@ -29,10 +29,10 @@ export function applyLanguageConfig() {
     const otherLanguages = SUPPORT_LANGUAGES.filter(item => item !== getUserLanguage());
 
     otherLanguages.forEach(item => {
-        const it = document.querySelector(item);
-        if (it != null) {
-            it.remove();
-        }
+        const it = document.querySelectorAll(item);
+        it.forEach((value) => {
+            value.remove();
+        })
     })
 
     console.log("Language config applied: " + getUserLanguage());
