@@ -49,7 +49,6 @@ export async function setHTMLContent(fileName, locationTargetKey, keyType) {
         .then((value) => {
             setContent(value, locationTargetKey, keyType);
         })
-    applyLanguageConfig();
 }
 
 export function appendContent(content, locationTargetKey, keyType) {
@@ -69,6 +68,7 @@ export function setContent(content, locationTargetKey, keyType) {
     } else if (keyType === "tag") {
         document.querySelector(locationTargetKey).innerHTML = content;
     }
+    applyLanguageConfig();
 }
 
 async function getData(dataFilePath) {
@@ -90,8 +90,4 @@ async function getData(dataFilePath) {
         });
 
     return data;
-
-    async function inner(response) {
-
-    }
 }
