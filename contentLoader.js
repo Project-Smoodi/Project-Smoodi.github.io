@@ -27,55 +27,41 @@ async function notfound() {
     await setHTMLContent("/error/notfound.html", "main", "tag");
 }
 
-export async function setHTMLContent(fileName, locationTargetKey, keyType) {
+export async function setHTMLContent(fileName, selectors) {
     await getData(fileName)
         .then((value) => {
-            setContent(value, locationTargetKey, keyType);
+            setContent(value, selectors);
         })
 }
 
-export function setContent(content, locationTargetKey, keyType) {
-    if (keyType === "id") {
-        document.getElementById(locationTargetKey).innerHTML = content;
-    } else if (keyType === "tag") {
-        document.querySelector(locationTargetKey).innerHTML = content;
-    }
+export function setContent(content, selectors) {
+    document.querySelector(selectors).innerHTML = content;
     applyLanguageConfig();
 }
 
-export async function appendHTMLContent(fileName, locationTargetKey, keyType) {
+export async function appendHTMLContent(fileName, selectors) {
     await getData(fileName)
         .then((value) => {
-            appendContent(value, locationTargetKey, keyType);
+            appendContent(value, selectors);
         })
 }
 
-export function appendContent(content, locationTargetKey, keyType) {
-    if (keyType === "id") {
-        const element = document.getElementById(locationTargetKey);
-        element.innerHTML = element.innerHTML + content;
-    } else if (keyType === "tag") {
-        const element = document.querySelector(locationTargetKey);
-        element.innerHTML = element.innerHTML + content;
-    }
+export function appendContent(content, selectors) {
+    const element = document.querySelector(selectors);
+    element.innerHTML = element.innerHTML + content;
     applyLanguageConfig();
 }
 
-export async function insertHTMLContentFront(fileName, locationTargetKey, keyType) {
+export async function insertHTMLContentFront(fileName, selectors) {
     await getData(fileName)
         .then((value) => {
-            insertContentFront(value, locationTargetKey, keyType);
+            insertContentFront(value, selectors);
         })
 }
 
-export function insertContentFront(content, locationTargetKey, keyType) {
-    if (keyType === "id") {
-        const element = document.getElementById(locationTargetKey);
-        element.innerHTML = content + element.innerHTML;
-    } else if (keyType === "tag") {
-        const element = document.querySelector(locationTargetKey);
-        element.innerHTML = content + element.innerHTML;
-    }
+export function insertContentFront(content, selectors) {
+    const element = document.querySelector(selectors);
+    element.innerHTML = content + element.innerHTML;
     applyLanguageConfig();
 }
 
