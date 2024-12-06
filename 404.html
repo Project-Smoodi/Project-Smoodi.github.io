@@ -13,6 +13,7 @@
     <script src="/contentLoader.js" type="module"></script>
     <script src="/language.js" type="module"></script>
     <script src="/utility.js" type="module"></script>
+    <script src="/tag/custom-tag-loader.js" type="module"></script>
     <script src="/tag/header/script.js" type="module"></script>
     <script src="/tag/sidebar/script.js" type="module"></script>
 </head>
@@ -23,11 +24,8 @@
     <main></main>
 
     <script type="module" defer>
-        import {loadContents, loadCustomTag} from "/contentLoader.js";
-        import {loadHeader} from "/tag/header/script.js";
+        import {loadContents} from "/contentLoader.js";
         import {loadSidebarContents} from "/tag/sidebar/script.js";
-
-        await loadCustomTag("header", "header", "tag", loadHeader);
 
         await loadContents();
 

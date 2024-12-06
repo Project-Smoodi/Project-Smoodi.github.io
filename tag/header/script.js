@@ -1,4 +1,4 @@
-import {changeLanguage, getUserLanguage} from "/language.js";
+import {changeLanguage} from "/language.js";
 
 export function loadHeader() {
     document.querySelector("#change-language").addEventListener("click", event => {

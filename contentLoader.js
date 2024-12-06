@@ -1,4 +1,5 @@
-import {applyLanguageConfig} from "./language.js";
+import {applyLanguageConfig} from "/language.js";
+import {loadCustomTags} from "/tag/custom-tag-loader.js";
 
 let main;
 
@@ -18,30 +19,13 @@ export async function loadContents() {
 
         applyLanguageConfig();
 
-        if (document.querySelector("unsupported") != null) {
-            await languageUnsupported();
-        }
-
-        if (document.querySelector("sidebar") != null) {
-            await setHTMLContent("/tag/sidebar/content.html", "sidebar", "tag")
-        }
     })
+
+    await loadCustomTags()
 }
 
 async function notfound() {
     await setHTMLContent("/error/notfound.html", "main", "tag");
-}
-
-export async function languageUnsupported() {
-    await setHTMLContent("/error/unsupported-language.html", "main", "tag");
-}
-
-export async function loadCustomTag(tagName, locationTargetKey, keyType, postFunc) {
-    await getData("/tag/" + tagName + "/content.html")
-        .then((value) => {
-            appendContent(value, locationTargetKey, keyType);
-            postFunc();
-        })
 }
 
 export async function setHTMLContent(fileName, locationTargetKey, keyType) {
