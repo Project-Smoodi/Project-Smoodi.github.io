@@ -1,5 +1,5 @@
 export function loadSidebarContents() {
-    const titles = document.querySelectorAll(".title");
+    const titles = document.querySelectorAll("h1, h2, h3, h4, h5, h6");
     const sidebar = document.querySelector("sidebar");
 
     if (sidebar == null) {
