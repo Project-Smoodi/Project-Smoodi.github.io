@@ -3,7 +3,15 @@
     color: #eeeeee;
 }
 
-p, a, p * {
+ol {
+    margin: 10px 0;
+}
+
+ol, ul {
+    gap: 10px
+}
+
+p, a, li, p * {
     padding: 0;
     margin: 0;
 
@@ -12,41 +20,41 @@ p, a, p * {
     white-space: normal;
 }
 
-.sidebar a {
-    text-decoration-line: none;
-}
-
 p strong {
     font-family: "Pretendard SemiBold";
 }
 
-.code {
-    font-family: "JetBrains Mono", ui-monospace;
+main p, main li {
+    line-height: 170%;
+    font-size: 19px;
 }
 
-main p {
-    line-height: 160%;
-    font-size: 20px;
+main li::marker {
+    margin-right: 10px;
 }
 
 main h1 {
     margin-top: 40px;
-    font-size: 40px;
+    font-size: 36px;
 }
 
 main h2 {
     margin-top: 40px;
-    font-size: 32px;
+    font-size: 30px;
 }
 
 main h3 {
-    font-size: 26px;
     margin: 10px 0;
+    font-size: 24px;
 }
 
 main h4 {
-    font-size: 20px;
     margin: 10px 0;
+    font-size: 20px;
+}
+
+.sidebar a {
+    text-decoration-line: none;
 }
 
 .sidebar-text {
@@ -59,4 +67,13 @@ main h4 {
 
 .sidebar-text:hover {
     background-color: #333333;
+}
+
+code {
+    padding: 1px 10px;
+    margin: 0 3px;
+    background-color: #333333;
+    border-radius: 10px;
+    font-family: "JetBrains Mono", ui-monospace;
+    font-size: 18px;
 }
