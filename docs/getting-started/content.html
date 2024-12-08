@@ -1,19 +1,13 @@
 <sidebar></sidebar>
 <en>
     <h1 class="title">Getting Started</h1>
-    <p></p>
     <h2>Adding Smoodi Dependencies</h2>
-    <p>To add Smoodi to your project, include the following dependency in your
-        <c>dependencies</c>
-        block.
-    </p>
-    <p>Replace
-        <c>version</c>
-        with the desired Smoodi version.
-    </p>
+    <p>To add Smoodi to your project, include the following dependency in your <c>dependencies</c> block.</p>
+    <p>Replace <c>version</c> with the desired Smoodi version.</p>
     <br/>
-    <code-block lang="Groovy(Gradle),Kotlin DSL">
-        <pre><code class="hljs language-gradle" lang="Groovy(Gradle)">
+
+    <code-block>
+        <pre><code class="hljs language-gradle" lang="Groovy (Gradle)">
 dependencies {
     implementation 'org.smoodi.framework:smoodi-web:version'
 }
@@ -24,15 +18,14 @@ dependencies {
 }
         </code></pre>
     </code-block>
+
     <h2>Configuring the Smoodi Repository</h2>
     <p>Smoodi is distributed via <b>GitHub Packages</b>.</p>
-    <p>Add the repository to your
-        <c>repositories</c>
-        block.
-    </p>
+    <p>Add the repository to your <c>repositories</c> block.</p>
     <br/>
+
     <code-block lang="Groovy(Gradle),Kotlin DSL">
-        <pre><code class="hljs language-gradle" lang="Groovy(Gradle)">
+        <pre><code class="hljs language-gradle" lang="Groovy (Gradle)">
 repositories {
     maven {
         name = 'GitHubPackages'
@@ -59,7 +52,100 @@ repositories {
 }
         </code></pre>
     </code-block>
+
+    <p>The credentials section provides authentication for accessing GitHub Packages.</p>
+
+    <ul>
+        <li>username: Your GitHub username.</li>
+        <li>password: A GitHub token (GHP token) with the read:packages permission.</li>
+    </ul>
+
+    <quote>
+        <h3>⚠️ Security Tip</h3>
+        <p>Avoid hardcoding credentials. Use <b>Gradle properties</b>
+            <c>(gradle.properties)</c>
+            or system
+            <b>environment variables</b> for security.
+        </p>
+    </quote>
+
+    <p>For details on generating a GHP token, refer to the
+        <a style="color: #297fff"
+           href="https://docs.github.com/ko/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-personal-access-token">GitHub
+            documentation</a>.</p>
+
+    <h2>Running Gradle</h2>
+
+    <p>Once the dependencies are configured, download them by running the following command in your project’s root
+        directory:</p>
+
+    <code-block>
+        <pre><code lang="bash">./gradlew</code></pre>
+    </code-block>
 </en>
 <ko>
+    <h1>Smoodi 시작하기</h1>
+    <br/>
+
+    <h2>Smoodi 의존성 설정</h2>
+    <p><c>dependencies</c> 블록에 아래와 같이 Smoodi 의존성을 추가합니다. <c>version</c> 위치에는 팀에서 요구하는 Smoodi 버전을 입력합니다.</p>
+
+    <code-block>
+        <pre><code class="hljs language-gradle" lang="Groovy (Gradle)">
+dependencies {
+    implementation 'org.smoodi.framework:smoodi-web:version'
+}
+        </code></pre>
+        <pre><code class="hljs language-kotlin" lang="Kotlin DSL">
+dependencies {
+    implementation("org.smoodi.framework:smoodi-web:version")
+}
+        </code></pre>
+    </code-block>
+
+    <h2>Smoodi Repository 추가</h2>
+    <p>Smoodi는 <b>Github Packages</b>를 통해 배포되어 있습니다.</p>
+    <p>아래와 같이 Smoodi의 <b>Github Packages Repository</b>를 <c>repositories</c> 블록에 추가합니다.</p>
+
+    <code-block>
+        <pre><code class="hljs language-gradle" lang="Groovy (Gradle)">
+repositories {
+    maven {
+        name = 'GitHubPackages'
+        url = 'https://maven.pkg.github.com/Project-Smoodi/Smoodi-Core'
+        credentials {
+            username = project.findProperty('gpr.user') // Github 유저 이름, Gradle 환경 변수를 이용한 설정
+            password = System.getenv('TOKEN') // 'read:packages' 권한이 활성화된 GHP 토큰, 시스템 환경 변수를 이용한 설정
+        }
+    }
+    mavenCentral() // Maven Repository를 통해 배포된 다른 의존성을 의존하기 위해 필요합니다. 대다수의 경우 필요하지만, 필요하지 않을 경우 제거하세요.
+}
+        </code></pre>
+        <pre><code class="hljs language-kotlin">
+repositories {
+    maven {
+        name = "GitHubPackages"
+        url = uri("https://maven.pkg.github.com/Project-Smoodi/Smoodi-Core")
+        credentials {
+            username = project.findProperty("gpr.user") // Github 유저 이름, Gradle 환경 변수를 이용한 설정
+            password = System.getenv("TOKEN") // 'read:packages' 권한이 활성화된 GHP 토큰, 시스템 환경 변수를 이용한 설정
+        }
+    }
+    mavenCentral() // Maven Repository를 통해 배포된 다른 의존성을 의존하기 위해 필요합니다. 대다수의 경우 필요하지만, 필요하지 않을 경우 제거하세요.
+}
+        </code></pre>
+    </code-block>
+
+    <p><c>repositories > maven > credentials</c> 영역은 <b>Github 계정 인증</b>을 위한 인증 정보를 기입하는 곳입니다.</p>
+    <p><i>Github Packages</i>는 패키지(Smoodi처럼, 온라인 저장소에 배포된 프로젝트들)에 접근하기 위해 Github 계정 인증이 필요합니다.</p>
+    <p><c>username</c>에는 사용자의 Github 이름, <c>password</c>에는 Github 계정의 정보를 담은 Github 토큰(GHP 토큰)을 입력합니다.</p>
+    <p>이 부분은 다른 사용자에게 노출되어서는 안되며, 위 코드 블럭에 제시된 것처럼 '<b>Gradle 환경 변수</b> (<c>gradle.properties</c> 파일)' 또는 '<b>시스템 환경
+        변수</b>'를 이용해 설정하기를 <b>권고</b>합니다.</p>
+
+    <quote>
+        <p>GHP 토큰 발급은 아래의 문서를 참고해주세요.</p>
+        <a href="https://docs.github.com/ko/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#personal-access-token-classic">Github
+            docs</a>
+    </quote>
 
 </ko>
