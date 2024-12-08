@@ -1,6 +1,7 @@
-import {insertHTMLContentFront, setHTMLContent} from "/contentLoader.js";
+import {setHTMLContent} from "/contentLoader.js";
 import {loadHeader} from "/tag/header/script.js";
 import {applyLanguageConfig} from "/language.js";
+import {loadCodeBlock} from "/tag/code/script.js";
 
 export async function loadCustomTags() {
 
@@ -18,13 +19,7 @@ export async function loadCustomTags() {
     }
 
     hljs.highlightAll();
-    document.querySelectorAll("code").forEach(await async function (value) {
-        const lang = value.className.split("language-")[1];
-        value.id = "code-language-insert";
-        await insertHTMLContentFront("/tag/code/content.html", "code-language-insert", "id");
-        value.firstElementChild.innerHTML = lang[0].toUpperCase() + lang.slice(1);
-        value.id = "";
-    })
+    await loadCodeBlock();
 
     applyLanguageConfig();
 }

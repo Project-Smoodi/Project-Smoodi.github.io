@@ -1,0 +1,61 @@
+pre {
+    height: min-content;
+    width: 100%;
+}
+
+code-block {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    border-radius: 10px;
+
+    background-color: #333333;
+}
+
+.code-block-button-wrap {
+    display: flex;
+    flex-direction: row;
+    border-radius: 10px 10px 0 0;
+    background-color: #333333;
+}
+
+.code-block-button {
+    display: flex;
+    flex-direction: row;
+
+    padding: 5px 10px;
+    border-radius: 10px 10px 0 0;
+    background-color: #333333;
+
+    font-size: 16px;
+}
+
+.code-block-button:hover {
+    background-color: #444444;
+}
+
+.code-block-element {
+    display: flex;
+    padding: 5px 10px;
+    border-radius: 10px 10px 0 0;
+}
+
+code {
+    display: flex;
+
+    height: min-content;
+    width: auto;
+
+    background-color: #333333;
+    border-radius: 0 0 10px 10px;
+    font-family: "JetBrains Mono", ui-monospace;
+    font-size: 16px;
+    white-space: pre-wrap;
+}
+
+code * {
+    font-family: "JetBrains Mono", ui-monospace;
+    font-size: 16px;
+    white-space: pre-wrap;
+}

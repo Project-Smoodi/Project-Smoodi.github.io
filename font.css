@@ -78,29 +78,3 @@ c {
     font-family: "JetBrains Mono", ui-monospace;
     font-size: 18px;
 }
-
-pre {
-    height: min-content;
-    width: 100%;
-}
-
-code {
-    display: flex;
-
-    height: min-content;
-    width: 90%;
-    padding: 0 5%;
-    margin: 10px 0;
-
-    background-color: #333333;
-    border-radius: 10px;
-    font-family: "JetBrains Mono", ui-monospace;
-    font-size: 16px;
-    white-space: pre-wrap;
-}
-
-code * {
-    font-family: "JetBrains Mono", ui-monospace;
-    font-size: 16px;
-    white-space: pre-wrap;
-}

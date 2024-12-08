@@ -1,3 +1,7 @@
 .clickable {
     transition: 0.3s;
 }
+
+.clickable:hover {
+    background-color: #444444;
+}
