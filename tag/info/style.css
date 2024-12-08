@@ -1,5 +1,5 @@
 info {
-    position: relative;
+    position: static;
     display: flex;
     flex-direction: column;
     justify-content: center;
