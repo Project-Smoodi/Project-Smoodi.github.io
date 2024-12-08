@@ -72,10 +72,14 @@ main h4 {
 }
 
 c {
-    padding: 1px 10px;
-    margin: 0 3px;
+    padding: 1px 6px;
+    margin: 0 3px 0 0;
     background-color: #333333;
-    border-radius: 10px;
+    border-radius: 5px;
     font-family: "JetBrains Mono", ui-monospace;
     font-size: 18px;
+}
+
+.link {
+    color: #297fff;
 }

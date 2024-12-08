@@ -70,7 +70,7 @@ repositories {
     </quote>
 
     <p>For details on generating a GHP token, refer to the
-        <a style="color: #297fff"
+        <a class="link"
            href="https://docs.github.com/ko/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-personal-access-token">GitHub
             documentation</a>.</p>
 
@@ -138,13 +138,14 @@ repositories {
 
     <p><c>repositories > maven > credentials</c> 영역은 <b>Github 계정 인증</b>을 위한 인증 정보를 기입하는 곳입니다.</p>
     <p><i>Github Packages</i>는 패키지(Smoodi처럼, 온라인 저장소에 배포된 프로젝트들)에 접근하기 위해 Github 계정 인증이 필요합니다.</p>
-    <p><c>username</c>에는 사용자의 Github 이름, <c>password</c>에는 Github 계정의 정보를 담은 Github 토큰(GHP 토큰)을 입력합니다.</p>
+    <p><c>username</c> 위치엔 사용자의 Github 이름, <c>password</c> 위치엔 Github 계정의 정보를 담은 Github 토큰(GHP 토큰)을 입력합니다.</p>
     <p>이 부분은 다른 사용자에게 노출되어서는 안되며, 위 코드 블럭에 제시된 것처럼 '<b>Gradle 환경 변수</b> (<c>gradle.properties</c> 파일)' 또는 '<b>시스템 환경
         변수</b>'를 이용해 설정하기를 <b>권고</b>합니다.</p>
 
     <quote>
         <p>GHP 토큰 발급은 아래의 문서를 참고해주세요.</p>
-        <a href="https://docs.github.com/ko/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#personal-access-token-classic">Github
+        <a class="link"
+           href="https://docs.github.com/ko/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#personal-access-token-classic">Github
             docs</a>
     </quote>
 
