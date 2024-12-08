@@ -58,7 +58,7 @@ export function changeCodeLanguage(event) {
                     buttons[i].style.backgroundColor = "#444444";
                 } else {
                     code.style.display = "none"
-                    buttons[i].style.backgroundColor = "#333333";
+                    buttons[i].style.backgroundColor = "";
                 }
             }
         }
