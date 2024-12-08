@@ -6,9 +6,9 @@ export function loadHeader() {
     })
 
     if (location.pathname.includes("docs/")) {
-        document.getElementsByClassName("header-logo-text")[0].textContent = "Project Smoodi Docs";
+        document.getElementsByClassName("header-logo-text")[0].innerHTML = "Project Smoodi <b>Docs</b>";
     } else if (location.pathname.includes("tech/")) {
-        document.getElementsByClassName("header-logo-text")[0].textContent = "Project Smoodi Tech Blog";
+        document.getElementsByClassName("header-logo-text")[0].innerHTML = "Project Smoodi <b>Tech<b/> Blog";
     } else {
         document.getElementsByClassName("header-logo-text")[0].textContent = "Project Smoodi";
     }

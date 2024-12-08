@@ -8,6 +8,11 @@
     white-space: normal;
 }
 
+main * {
+    line-height: 170%;
+    font-size: 19px;
+}
+
 p * {
     font-family: inherit;
     font-size: inherit;
@@ -42,11 +47,6 @@ p, a, li, p * {
 
 .link {
     color: #297fff;
-}
-
-main * {
-    line-height: 170%;
-    font-size: 19px;
 }
 
 main li::marker {
