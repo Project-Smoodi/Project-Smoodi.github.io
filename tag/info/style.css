@@ -1,0 +1,39 @@
+info {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+
+    width: 90%;
+    padding: 10px 5%;
+
+    background-color: #383838;
+}
+
+.info-title {
+    font-size: 40px;
+    font-family: "Pretendard SemiBold";
+    font-style: italic;
+}
+
+.info-description {
+    font-size: 24px;
+    font-family: "Pretendard";
+    color: #bbbbbb;
+}
+
+.info-other {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.info-other * {
+    color: #777777;
+    font-size: 16px;
+}
+
+.info-version {
+    display: flex;
+}
