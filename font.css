@@ -8,6 +8,25 @@
     white-space: normal;
 }
 
+p * {
+    font-family: inherit;
+    font-size: inherit;
+    color: inherit;
+}
+
+b {
+    font-family: "Pretendard SemiBold";
+}
+
+c {
+    padding: 1px 7px;
+    margin: 0 3px 0 0;
+    background-color: #333333;
+    border-radius: 5px;
+    font-family: "JetBrains Mono", ui-monospace;
+    font-size: 17px;
+}
+
 ol {
     margin: 10px 0;
 }
@@ -18,12 +37,11 @@ ol, ul {
 }
 
 p, a, li, p * {
-
     height: min-content;
 }
 
-p strong {
-    font-family: "Pretendard SemiBold";
+.link {
+    color: #297fff;
 }
 
 main * {
@@ -69,17 +87,4 @@ main h4 {
 
 .sidebar-text:hover {
     background-color: #333333;
-}
-
-c {
-    padding: 1px 7px;
-    margin: 0 3px 0 0;
-    background-color: #333333;
-    border-radius: 5px;
-    font-family: "JetBrains Mono", ui-monospace;
-    font-size: 17px;
-}
-
-.link {
-    color: #297fff;
 }
