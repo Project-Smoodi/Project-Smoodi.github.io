@@ -4,7 +4,6 @@
     <h2>Adding Smoodi Dependencies</h2>
     <p>To add Smoodi to your project, include the following dependency in your <c>dependencies</c> block.</p>
     <p>Replace <c>version</c> with the desired Smoodi version.</p>
-    <br/>
 
     <code-block>
         <pre><code class="hljs language-gradle" lang="Groovy (Gradle)">
@@ -22,7 +21,6 @@ dependencies {
     <h2>Configuring the Smoodi Repository</h2>
     <p>Smoodi is distributed via <b>GitHub Packages</b>.</p>
     <p>Add the repository to your <c>repositories</c> block.</p>
-    <br/>
 
     <code-block lang="Groovy(Gradle),Kotlin DSL">
         <pre><code class="hljs language-gradle" lang="Groovy (Gradle)">
@@ -121,7 +119,7 @@ repositories {
     mavenCentral() // Maven Repository를 통해 배포된 다른 의존성을 의존하기 위해 필요합니다. 대다수의 경우 필요하지만, 필요하지 않을 경우 제거하세요.
 }
         </code></pre>
-        <pre><code class="hljs language-kotlin">
+        <pre><code class="hljs language-kotlin" lang="Kotlin DSL">
 repositories {
     maven {
         name = "GitHubPackages"

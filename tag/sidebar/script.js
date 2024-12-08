@@ -9,7 +9,8 @@ export function loadSidebarContents() {
     titles.forEach((title, key) => {
         title.id = "title-" + key;
 
-        const sidebarContent = document.createElement("p");
+        const sidebarContent = document.createElement("div");
+        sidebarContent.role = "button"
         sidebarContent.className += "sidebar-text";
         sidebarContent.innerHTML = title.innerHTML;
         sidebarContent.href = "#" + title.id;

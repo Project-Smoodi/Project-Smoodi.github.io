@@ -48,10 +48,10 @@ ko, en {
 }
 
 quote {
-    margin: 0 5%;
+    width: 80%;
+    margin: 30px 5%;
     padding: 30px 5%;
 
-    width: 80%;
     border-radius: 10px;
 
     background-color: #333333;
