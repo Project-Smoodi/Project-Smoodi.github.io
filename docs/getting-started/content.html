@@ -12,12 +12,53 @@
         with the desired Smoodi version.
     </p>
     <br/>
-    <p><i><b>Groovy</b> (build.gradle)</i></p>
-    <pre><code class="hljs language-java">
+    <code-block lang="Groovy(Gradle),Kotlin DSL">
+        <pre><code class="hljs language-gradle" lang="Groovy(Gradle)">
 dependencies {
     implementation 'org.smoodi.framework:smoodi-web:version'
 }
-    </code></pre>
+        </code></pre>
+        <pre><code class="hljs language-kotlin" lang="Kotlin DSL">
+dependencies {
+    implementation("org.smoodi.framework:smoodi-web:version")
+}
+        </code></pre>
+    </code-block>
+    <h2>Configuring the Smoodi Repository</h2>
+    <p>Smoodi is distributed via <b>GitHub Packages</b>.</p>
+    <p>Add the repository to your
+        <c>repositories</c>
+        block.
+    </p>
+    <br/>
+    <code-block lang="Groovy(Gradle),Kotlin DSL">
+        <pre><code class="hljs language-gradle" lang="Groovy(Gradle)">
+repositories {
+    maven {
+        name = 'GitHubPackages'
+        url = 'https://maven.pkg.github.com/Project-Smoodi/Smoodi-Core'
+        credentials {
+            username = project.findProperty('gpr.user') // GitHub username, set via Gradle properties
+            password = System.getenv('TOKEN') // GHP token with 'read:packages' permission, set via environment variables
+        }
+    }
+    mavenCentral() // Include if you need dependencies from Maven Central.
+}
+        </code></pre>
+        <pre><code class="hljs language-kotlin" lang="Kotlin DSL">
+repositories {
+    maven {
+        name = "GitHubPackages"
+        url = uri("https://maven.pkg.github.com/Project-Smoodi/Smoodi-Core")
+        credentials {
+            username = project.findProperty("gpr.user") // GitHub username, set via Gradle properties
+            password = System.getenv("TOKEN") // GHP token with 'read:packages' permission, set via environment variables
+        }
+    }
+    mavenCentral() // Include if you need dependencies from Maven Central.
+}
+        </code></pre>
+    </code-block>
 </en>
 <ko>
 
