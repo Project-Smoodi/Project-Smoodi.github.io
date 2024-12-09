@@ -2,7 +2,8 @@ import {applyLanguageConfig} from "/language.js";
 
 export function loadInfo() {
     const info = document.querySelector("info");
-    console.log(info);
+
+    if (!info) return;
 
     const title = info.getElementsByClassName("info-title")[0];
     const description = info.getElementsByClassName("info-description")[0];
