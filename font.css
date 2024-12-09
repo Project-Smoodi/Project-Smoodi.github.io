@@ -6,6 +6,8 @@
     font-size: 16px;
     color: #eeeeee;
     white-space: normal;
+
+    font-variant-ligatures: none;
 }
 
 main * {
