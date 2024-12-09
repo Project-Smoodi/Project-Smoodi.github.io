@@ -1,0 +1,84 @@
+document-table {
+    position: fixed;
+    right: 20%;
+    top: 15%;
+
+    display: flex;
+    flex-direction: column;
+
+    padding: 20px 5%;
+    width: 50%;
+    height: 70%;
+    gap: 50px;
+
+    border-radius: 10px;
+
+    background-color: #2d2d2d;
+
+    overflow-y: scroll;
+}
+
+document-table::-webkit-scrollbar-thumb {
+    border: 5px solid #2d2d2d;
+}
+
+.document-table-folder {
+    display: flex;
+    flex-direction: column;
+
+    padding: 0 20px;
+    gap: 10px;
+}
+
+.document-table-title {
+    font-size: 30px;
+
+    padding-bottom: 5px;
+    border-bottom: 2px solid #eeeeee;
+}
+
+document-table-folder {
+    display: flex;
+    flex-direction: column;
+
+    align-items: start;
+    gap: 10px;
+}
+
+document-table-folder-name {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+document-table-folder-name * {
+    font-size: 20px;
+}
+
+document-table-folder-contents {
+    display: flex;
+    flex-direction: column;
+
+    padding: 0 0 0 20px;
+    gap: 10px;
+}
+
+.document-table-text {
+    display: flex;
+    flex-direction: row;
+
+    max-width: 100%;
+    width: max-content;
+    padding: 3px 10px;
+    gap: 10px;
+    border-radius: 7px;
+
+    text-decoration-line: none;
+    transition: 0.3s;
+}
+
+.document-table-text:hover {
+    background-color: #444444;
+    transform: translateX(10px);
+}
+
