@@ -42,25 +42,31 @@ export async function loadCodeBlock() {
 export function changeCodeLanguage(event) {
     event.preventDefault();
     event.stopPropagation();
-    const key = event.target.getAttribute("key");
+
+    const codeBlock = event.target.parentElement.parentElement;
     const lang = event.target.innerHTML;
 
-    document.querySelectorAll("code-block").forEach(codeBlock => {
-        if (codeBlock.key === key) {
-            codeBlock.current = lang;
-            const elements = codeBlock.getElementsByTagName("pre");
-            const buttons = codeBlock.firstElementChild.getElementsByClassName("code-block-button");
+    document.querySelectorAll("code-block").forEach(another => {
+        if (another.getAttribute("group") === codeBlock.getAttribute("group")
+            && codeBlock.getAttribute("group") !== undefined) {
+            changeDisplayLanguage(another, lang)
+        }
+    });
 
-            for (let i = 0; i < elements.length; i++) {
-                const code = elements[i].firstElementChild;
-                if (code.lang === lang) {
-                    code.style.display = "block"
-                    buttons[i].style.backgroundColor = "#444444";
-                } else {
-                    code.style.display = "none"
-                    buttons[i].style.backgroundColor = "";
-                }
+    function changeDisplayLanguage(codeBlock, lang) {
+        codeBlock.current = lang;
+        const elements = codeBlock.getElementsByTagName("pre");
+        const buttons = codeBlock.firstElementChild.getElementsByClassName("code-block-button");
+
+        for (let i = 0; i < elements.length; i++) {
+            const code = elements[i].firstElementChild;
+            if (code.lang === lang) {
+                code.style.display = "block"
+                buttons[i].style.backgroundColor = "#444444";
+            } else {
+                code.style.display = "none"
+                buttons[i].style.backgroundColor = "";
             }
         }
-    })
+    }
 }
