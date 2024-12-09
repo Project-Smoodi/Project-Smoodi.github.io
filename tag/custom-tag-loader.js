@@ -16,8 +16,8 @@ export async function loadCustomTags() {
     await setHTMLContent("/tag/info/content.html", "info");
     loadInfo();
 
-    document.querySelectorAll("sidebar").forEach(await async function () {
-        await setHTMLContent("/tag/sidebar/content.html", "sidebar");
+    document.querySelectorAll("content-table").forEach(await async function () {
+        await setHTMLContent("/tag/content-table/content.html", "content-table");
     });
 
     if (document.querySelector("header") != null) {

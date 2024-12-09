@@ -1,4 +1,4 @@
-sidebar {
+content-table {
     position: fixed;
     right: 3%;
     top: 120px;
@@ -20,11 +20,11 @@ sidebar {
     background-color: #2d2d2d;
 }
 
-sidebar::-webkit-scrollbar {
+content-table::-webkit-scrollbar {
     width: 20px;
 }
 
-sidebar::-webkit-scrollbar-thumb {
+content-table::-webkit-scrollbar-thumb {
     background-color: rgba(255, 255, 255, 50%);
     width: 10px;
 
@@ -32,14 +32,25 @@ sidebar::-webkit-scrollbar-thumb {
     border-radius: 10px;
 }
 
-sidebar::-webkit-scrollbar-button, .sidebar::-webkit-scrollbar-corner {
+content-table::-webkit-scrollbar-button, content-table::-webkit-scrollbar-corner {
     visibility: hidden;
 }
 
-.sidebar-text {
+.content-table-text {
+    padding: 10px;
+    border-radius: 10px;
+
+    font-family: "Pretendard SemiBold";
+    line-height: 120%;
+
     transition: 0.5s;
 }
 
-.sidebar-text:hover {
+.content-table-text:hover {
     transform: translateX(-5px);
+    background-color: #333333;
+}
+
+.content-table a {
+    text-decoration-line: none;
 }

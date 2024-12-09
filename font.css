@@ -72,19 +72,3 @@ main h4 {
     margin: 10px 0;
     font-size: 20px;
 }
-
-.sidebar a {
-    text-decoration-line: none;
-}
-
-.sidebar-text {
-    padding: 10px;
-    border-radius: 10px;
-
-    font-family: "Pretendard SemiBold";
-    line-height: 120%;
-}
-
-.sidebar-text:hover {
-    background-color: #333333;
-}
