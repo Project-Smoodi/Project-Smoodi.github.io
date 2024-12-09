@@ -2,7 +2,11 @@
     <unsupported></unsupported>
 </en>
 <ko>
-    <sidebar></sidebar>
+    <info title="생성자 DI 및 IoC 컨테이너 환경에서 순환 참조에 대한 처리 로직 작성하기"
+          year="2024" month="12" day="8" hour="1"></info>
+
+    <content-table></content-table>
+
     <h1 class="title">1. 생성자 DI에서의 순환 참조</h1>
     <p><i>Smoodi Framework</i> 는 IoC 컨테이너를 기반 개발 환경을 제공하는 WAS 프레임워크입니다. 객체 간의 의존성은 생성자 DI로 관리합니다.</p>
     <p>만약 객체 중에 순환 참조가 존재한다면 객체 초기화가 불가능하게 됩니다.</p>
@@ -21,8 +25,11 @@
         <li>가변 의존성 변수는 설계적으로 불안정하다고 생각합니다. 그렇기에 Smoodi 는 기본적으로 모든 객체를 불변이라 가정하고 관리합니다. 보다 높은 안정성을 위함입니다.</li>
         <li>또한 Smoodi 가 지향하는 설계는 일방향 의존성이며, 순환을 허용하지 않습니다.</li>
     </ol>
+
     <p>위 세 개 이유에 따라 순환 참조를 구현하지 않으려 합니다. 대신 이 순환 참조를 탐지하고 알리기 위한 로직을 작성하겠습니다.</p>
+
     <h1 class="title">3. 요구사항 분석</h1>
+
     <h2 class="title">객체 간의 순환 참조를 탐색합니다.</h2>
     <ol>
         <li>각 객체는 다른 객체와 통신하기 위해 의존하는 의존성을 지니고 있습니다. 이 의존성은 단방향이며, 여러 개 존재할 수 있습니다.<br>
@@ -34,13 +41,17 @@
             즉, 여러 그래프가 존재할 가능성이 있습니다.
         </li>
     </ol>
+
     <h2 class="title">사용자에게 순환 참조가 어떻게 구성되어있는지 정확히 보여주어야 합니다.</h2>
     <p>단순히 특정 객체에 순환 참조 의존성이 존재한다가 아닌, 상세한 참조열은 출력해야 합니다.</p>
+
     <h1 class="title">4. 해결 과정</h1>
+
     <h2 class="title">상세 알고리즘 선택</h2>
     <p>참조'열'을 탐색해야 하므로, 사이클이 구성된 간선을 일렬로 탐색하도록 구성해야 합니다.</p>
     <p><b>VFS</b>보다는 <b>DFS, Depth First Search</b>가 적합해 보입니다.</p>
     <p>간선이 복잡하게 얽혀 있어 일반 함수와 반복문으로 구현하기엔 너무 복잡할 것 같습니다. <b>재귀 함수를 이용한 DFS</b>로 구현하겠습니다.</p>
+
     <h2 class="title">기존의 객체 생성 로직</h2>
     <p>아주 간단한 논리로 동작합니다.</p>
     <ol>
@@ -54,4 +65,190 @@
     <quote>
         아래 코드는 읽어볼 필요까진 없습니다. 바로 밑에 이해를 돕기 위한 예시 상황을 들어 한 번 더 설명합니다.
     </quote>
+
+    <code-block>
+        <pre><code class="hljs language-java" lang="Java">
+// 대상 타입은 중요하지 않으므로 와일드카드를 사용합니다.
+List&lt;Constructor&lt;?&gt;&gt; constructors = getConstructors(); // 추상화
+
+// 반복 순회
+while (1) {
+
+    // 생성자에 대한 반복문
+	for (Consturctor&lt;?&gt; constructor : constructors) {
+
+        // 생성자 매개변수로 넘기기 위한, 객체 저장용 Collection입니다.
+        // 실제로는 ArrayList의 크기를 할당해주어야 합니다.
+    	List&lt;Parameter&gt; objectsForParameter = new ArrayList<>();
+
+        // 생성자 매개변수에 대한 반복문
+        for (Class&lt;?&gt; parameterType : constructor.getParameterTypes()) {
+
+        	// IoC 컨테이너로부터 객체를 불러옵니다.
+        	Object obj = container.getObjectByTypeOrNull(parameterType);
+
+            // 만약 초기화된 객체가 없다면, 해당 생성자는 건너뜁니다.
+            if (obj == null) {
+                break;
+            }
+
+            // 객체가 있다면 매개변수에 사용하기 위해 저장합니다.
+            objectsForParameter.add(obj);
+        }
+
+        // 매개변수의 갯수와 찾아낸 객체의 갯수가 같다면,
+        // 즉 매개변수 타입들이 모두 초기화된 객체가 모두 있었다면
+        // 생성자를 실행하고 IoC 컨테이너에 저장합니다.
+        if (constructor.getParameterTypes().length == objectForParameter.size()) {
+        	Object obj = constructor.newInstance(obj.toArray());
+            container.save(obj);
+        }
+    }
+}
+        </code></pre>
+    </code-block>
+
+    <p>이는 마치 연구 트리와 비슷한 개념입니다. 어느 게임의 성장 방식과 아주 유사합니다.</p>
+    <p>처음엔 <i>아무런 도구도 필요하지 않은</i> <b>나무</b>를 얻습니다. 그 이후 나무를 가공해 판자를 얻고, 조합대를 통해 곡괭이까지 이어집니다.</p>
+    <p>나무 -> 판자 -> 조합대 -> 곡괭이.</p>
+    <p>여기서 나무는 <b>기본 생성자를 가진 타입</b>입니다.</p>
+    <p>나머지는 <b>나무를 매개변수로 삼는 또다른 타입</b>이 됩니다.</p>
+
+    <h2>오류 발생</h2>
+    <p>만약 생성자 리스트를 한 번 순회했으나 아무런 객체도 만들어지지 않았다면, 의존성이 서로 꼬여 있음을 의미합니다. 즉 순환 참조가 존재하는 상황입니다.</p>
+
+    <code-block>
+        <pre><code class="hljs language-java" lang="Java">
+// 생성자 갯수가 줄어들었는지 비교합니다.
+if (lastListSize == constructors.size()) {
+    // 순환 참조를 탐색합니다.
+    CircularDependencySearch.search(constructors);
+}
+        </code></pre>
+    </code-block>
+
+    <h2>순환 참조 탐색</h2>
+    <p>알고리즘은 자세히 설명하면 내용이 너무 늘어지므로 간략히 설명하겠습니다.</p>
+    <p>아래와 같이 단방향 그래프 사이클 탐색을 위한, 정점 VO를 준비합니다.</p>
+
+    <code-block>
+        <pre><code class="hljs language-java" lang="Java">
+// 정점 VO, 생성자는 생략합니다.
+class Node {
+    Class&lt;?&gt; klass; // 클래스 Reflection
+    Parameter[] parameters; // 생성자의 매개변수 배열; 간선
+    boolean visited; // 방문 여부
+    boolean searchFinished; // 해당 정점의 간선 탐색이 끝났는지 여부
+}
+        </code></pre>
+    </code-block>
+
+    <ol>
+        <li>재귀함수 DFS를 기본으로 작동합니다.</li>
+        <li>한 정점에 도달하면 <c>visited</c>를 <c>true</c>로 설정합니다.</li>
+        <li>정점의 모든 간선 탐색을 끝마치면 <c>searchFinished</c>를 <c>true</c>로 설정합니다.</li>
+        <li>만약 <c>visited</c>는 <c>true</c>이지만 <c>searchFinished</c>는 <c>false</c>인 정점을 만난다면, 해당 정점의 간선을 탐색하는 도중에 다시 되돌아온
+            상황입니다. 즉, 사이클을 탐지한 상황입니다.
+        </li>
+    </ol>
+
+    <p>아래와 같은 그래프가 있다고 해봅시다. <c>A, B, C, D</c> 네 개 정점이 있습니다.</p>
+    <code-block>
+        <pre><code class="hljs language-javascript" lang="#">
+// A00 => 정점 이름, visited, searchFinished 순서로 나열.
+// A00 => 정점 A, visted = false, searchFinished = false
+// A => A00, `A` => A10, "A" => A11
+// time 0: 뒤의 문자는 현재 탐색 중인 정점을 의미
+
+time 0:null
+A ← ←
+↓   ↑
+B → C
+↓
+D
+        </code></pre>
+    </code-block>
+
+    <p><c>A</c>를 진입점으로 탐색을 시작할 경우, 먼저 아래와 같이 <c>D</c>까지 탐색합니다.</p>
+    <code-block>
+        <pre><code class="hljs language-javascript" lang="#">
+// A00 => 정점 이름, visited, searchFinished 순서로 나열.
+// A00 => 정점 A, visted = false, searchFinished = false
+// A => A00, `A` => A10, "A" => A11
+// time n: 뒤의 문자는 현재 탐색 중인 정점을 의미
+
+ time 0:A | time 1:B |  time 2:D | time 3:B |
+ `A` ← ←  | `A` ← ←  |  `A` ← ←  |  `A` ← ←  |
+  ↓    ↑  |  ↓    ↑  |   ↓    ↑  |   ↓    ↑  |
+  B  → C  | `B` → C  |  `B` → C  |  `B` → C  |
+  ↓       |  ↓       |   ↓       |   ↓       |
+  D       |  D       |  `D`      |  "D"      |
+        </code></pre>
+    </code-block>
+
+    <p>현재 탐색 중인 정점은 <c>B</c>이며, <c>C</c>를 마저 탐색해보겠습니다.</p>
+    <code-block>
+        <pre><code class="hljs language-javascript" lang="#">
+// A00 => 정점 이름, visited, searchFinished 순서로 나열.
+// A00 => 정점 A, visted = false, searchFinished = false
+// A => A00, `A` => A10, "A" => A11
+// time 0: 뒤의 문자는 현재 탐색 중인 정점을 의미
+
+A10 B10 C00 D11
+
+ time 0:B |  time 1:C |  time 2:A |
+ `A` ← ←  | `A` ←  ←  |  `A` ←  ←  |
+  ↓    ↑  |  ↓     ↑  |   ↓     ↑  |
+ `B` → C  | `B` → `C` |  `B` → `C` |
+  ↓       |  ↓        |   ↓        |
+ "D"      | "D"       |  "D"       |
+        </code></pre>
+    </code-block>
+
+    <p><c>A</c>에 도달했으나 <c>visited = true, searchFinished = false</c>의 상태를 갖고 있습니다. 사이클을 찾았습니다. 알고리즘은 위 예시처럼 동작하며, 이제
+        참조열을 추출해내야 합니다.</p>
+
+    <h2>참조열 추출</h2>
+    <p>재귀함수를 통해 구현했으므로, 순환 참조가 발생한 지점에서 스택 메모리를 스캔하면 참조열을 얻어낼 수 있습니다.</p>
+    <p>임의의 정점의 간선들을 탐색하는 과정에서, 다시 해당 정점 또는 지나온 정점에 도달하면 사이클이라고 판단합니다. 또한 이 과정은 재귀함수를 통해 탐색합니다. 그러므로 사이클 탐지 시점에는 <b>JVM
+        스택 메모리</b>에 사이클에 대한 정점들이 쌓여있습니다. 이것을 스캔합니다.</p>
+    <p>만약 <c>A -> B -> C -> A</c>의 순환 참조가 있고, <c>1st A</c>부터 탐색을 시작한다고 하면, <c>A -> B -> C</c>를 거쳐 <c>2nd A</c>에 도달합니다. 이
+        때 스택 메모리를 스캔하면 <c>A, C, B, A</c>의 참조열을 얻어낼 수 있습니다. 뒤집어주면 정확한 참조열이 완성됩니다.</p>
+
+    <quote>
+        진입점이 어디던 간에, 결국 순환 참조이므로 다시 본인에게 도달합니다.
+        또한 사이클을 구성하는 정점에서 바깥으로 향하는 다른 간선이나, 이 사이클로 향하는 간선이 있더라도 상관 없이 사이클만 탐색됩니다.
+    </quote>
+
+    <h1>5. 결과</h1>
+    <p>아래와 같이 순환 참조가 있도록 클래스를 작성해 실행해보면, 의도한대로 에러가 발생합니다.</p>
+
+    <code-block>
+        <pre><code class="hljs language-java" lang="Java">
+@Module
+public class ModuleA {
+    public ModuleA(ModuleB moduleB) {}
+}
+
+@Module
+public class ModuleB {
+    public ModuleB(ModuleC moduleC) {}
+}
+
+@Module
+public class ModuleC {
+    public ModuleC(ModuleA moduleA) {}
+}
+        </code></pre>
+    </code-block>
+
+    <img src="img.png" alt="test succeeded log image">
+
+    <h1>6. 결론: 잡담과 배운 것</h1>
+    <p>꽤나 긴 여정이였지만, 정말 재밌었던 경험이였습니다. 문제 해결 능력을 키우는 데에 많은 도움이 되어주었으며, 도메인에 대한 시야를 넓힐 수 있던 기회였기도 합니다.</p>
+    <p>아직 학생이기에 실무를 경험해본 적이 없어 이런 형태의 로직을 작성할진 모르겠습니다만, 이런 흥미진진한 문제들이 기다리고 있을 거라 생각하니 기대가 커졌습니다.</p>
+    <p>이 코드를 작성할 당시 제 딴엔 최선을 다한, 그럴싸하게 깔끔한 코드라고 생각했습니다. 하지만 지금 글을 쓰기 위해 다시 둘러보니 참 많은 생각이 들었습니다. 알고리즘을 이렇게 짜면 최적화에 무조건
+        불리할텐데, 여기에 이 기술을 쓰면 레이턴시가 엄청날텐데.. 하며 반성의 시간을 조금 가졌습니다.</p>
+    <p>한 편으론 이 때보다 꽤 성장했다고 생각이 들기도 합니다. 물론 안도하지 않고, 계속 정진해야죠.</p>
+    <p>다음 글에서 뵙겠습니다. 감사합니다.</p>
 </ko>

@@ -80,3 +80,7 @@ quote {
 
     gap: 20px;
 }
+
+main img {
+    width: 100%;
+}
