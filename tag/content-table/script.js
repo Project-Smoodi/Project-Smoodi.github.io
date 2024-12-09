@@ -6,6 +6,10 @@ export function loadSidebarContents() {
         return;
     }
 
+    if (titles.length=== 0) {
+        document.querySelector("content-table").remove();
+    }
+
     titles.forEach((title, key) => {
         title.id = "title-" + key;
 
