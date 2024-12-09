@@ -59,6 +59,7 @@ document-table-folder-contents {
     display: flex;
     flex-direction: column;
 
+    max-width: 100%;
     padding: 0 0 0 20px;
     gap: 10px;
 }
@@ -66,15 +67,21 @@ document-table-folder-contents {
 .document-table-text {
     display: flex;
     flex-direction: row;
+    align-items: start;
 
     max-width: 100%;
     width: max-content;
+
     padding: 3px 10px;
     gap: 10px;
     border-radius: 7px;
 
     text-decoration-line: none;
     transition: 0.3s;
+}
+
+.document-table-text * {
+    max-width: 100%;
 }
 
 .document-table-text:hover {
