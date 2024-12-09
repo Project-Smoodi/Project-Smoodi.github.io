@@ -7,9 +7,15 @@ export function loadFolderNames() {
 
     const folderContentsElements = document.querySelectorAll("document-table-folder-contents");
 
-    folderContentsElements.forEach(element => {
-        element.childNodes.forEach((child) => {
-            child.innerHTML = itemImg() + child.innerHTML;
+    folderContentsElements.forEach(folderContents => {
+        folderContents.childNodes.forEach(anchor => {
+            anchor.innerHTML = itemImg() + anchor.innerHTML;
+            anchor.addEventListener("click", event => {
+                event.stopPropagation();
+                event.preventDefault();
+
+                location.pathname = new URL(anchor.href).pathname + "/";
+            });
         })
     })
 
