@@ -89,3 +89,6 @@ document-table-folder-contents {
     transform: translateX(10px);
 }
 
+document-table img {
+    width: 30px;
+}
