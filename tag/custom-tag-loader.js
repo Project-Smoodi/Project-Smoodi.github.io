@@ -4,6 +4,7 @@ import {applyLanguageConfig} from "/language.js";
 import {loadCodeBlock} from "/tag/code/script.js";
 import {loadInfo} from "/tag/info/script.js";
 import {loadFolderNames} from "/tag/document-table/script.js";
+import {loadSidebarContents} from "/tag/content-table/script.js";
 
 export async function loadCustomTags() {
 
@@ -23,6 +24,7 @@ export async function loadCustomTags() {
 
     document.querySelectorAll("content-table").forEach(await async function () {
         await setHTMLContent("/tag/content-table/content.html", "content-table");
+        loadSidebarContents();
     });
 
     if (document.querySelector("header") != null) {
