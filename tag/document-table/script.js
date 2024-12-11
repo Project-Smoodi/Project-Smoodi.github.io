@@ -60,7 +60,13 @@ export function loadFolderNames() {
     }
 
     function getPath() {
-        const raw = location.pathname.split("/Project-Smoodi-Docs")[1];
+        let raw;
+        if (location.pathname.startsWith("/Project-Smoodi-Docs")) {
+            raw = location.pathname.split("/Project-Smoodi-Docs")[1];
+        } else {
+            raw = location.pathname;
+        }
+
 
         if (raw.endsWith("/")) {
             return raw.slice(0, -1);
