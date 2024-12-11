@@ -18,6 +18,10 @@ export async function loadContents() {
         }
 
         applyLanguageConfig();
+
+        if (document.querySelector("info")) {
+            document.title = document.querySelector("info").title;
+        }
     })
 
     await loadCustomTags()
