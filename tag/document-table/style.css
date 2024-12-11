@@ -48,6 +48,7 @@ document-table-folder {
 document-table-folder-name {
     display: flex;
     flex-direction: row;
+    padding: 0 0 0 10px;
     gap: 10px;
 }
 
