@@ -7,13 +7,7 @@ export function loadFolderNames() {
     if (path.length > 1) {
         const forDelete = [];
         folders.forEach((folder, key) => {
-            let name;
-            if (!folder.getAttribute("fullname")) {
-                name = folder.getAttribute("name");
-            } else {
-                name = folder.getAttribute("fullname");
-            }
-            if (!name.startsWith(path)) {
+            if (!folder.getAttribute("fullname").startsWith(path)) {
                 forDelete.push(key);
             }
         })
@@ -23,7 +17,13 @@ export function loadFolderNames() {
     }
 
     folders.forEach(element => {
-        element.prepend(toFolderName(element.getAttribute("name")));
+        element.prepend(toFolderName(element));
+        element.firstElementChild.addEventListener("click", event => {
+            event.stopPropagation();
+            event.preventDefault();
+
+            location.pathname = element.getAttribute("fullname");
+        })
     })
 
     const folderContentsElements = document.querySelectorAll("document-table-folder-contents");
@@ -44,9 +44,11 @@ export function loadFolderNames() {
         }
     })
 
-    function toFolderName(name) {
-        const folderName = document.createElement("document-table-folder-name");
-        folderName.innerHTML = `<img src="/public/folder.svg" alt="folder" width="30px"><p>${name}</p>`
+    function toFolderName(folder) {
+        const folderName = document.createElement("a");
+        folderName.className = "document-table-folder-name";
+        folderName.href = folder.getAttribute("fullname");
+        folderName.innerHTML = `<img src="/public/folder.svg" alt="folder" width="30px"><p>${folder.getAttribute("name")}</p>`
         return folderName;
     }
 

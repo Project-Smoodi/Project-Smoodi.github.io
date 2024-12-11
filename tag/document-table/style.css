@@ -45,14 +45,18 @@ document-table-folder {
     gap: 10px;
 }
 
-document-table-folder-name {
+.document-table-folder-name {
     display: flex;
     flex-direction: row;
-    padding: 0 0 0 10px;
+    padding: 3px 10px;
     gap: 10px;
+    border-radius: 7px;
+
+    text-decoration-line: none;
+    transition: 0.3s;
 }
 
-document-table-folder-name * {
+.document-table-folder-name * {
     font-size: 20px;
 }
 
@@ -85,7 +89,7 @@ document-table-folder-contents {
     max-width: 100%;
 }
 
-.document-table-text:hover {
+.document-table-folder-name:hover, .document-table-text:hover {
     background-color: #444444;
     transform: translateX(10px);
 }
