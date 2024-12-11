@@ -13,9 +13,9 @@ export async function loadContents() {
         if (value === undefined) {
             await notfound();
             errored = true;
+        } else {
+            main.innerHTML = value;
         }
-
-        main.innerHTML = value;
 
         applyLanguageConfig();
     })
