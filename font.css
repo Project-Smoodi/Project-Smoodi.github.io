@@ -54,7 +54,12 @@ p, a, li, p * {
 }
 
 .link {
-    color: #297fff;
+    color: #3993dd;
+    transition: 0.3s;
+}
+
+.link:hover {
+    color: #6eb9ff;
 }
 
 main li::marker {
