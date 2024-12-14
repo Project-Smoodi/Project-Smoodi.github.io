@@ -14,7 +14,7 @@
 
 main * {
     line-height: 170%;
-    font-size: 19px;
+    font-size: 18px;
     word-break: keep-all;
 }
 
@@ -34,7 +34,7 @@ c {
     background-color: #333333;
     border-radius: 5px;
     font-family: "JetBrains Mono", ui-monospace;
-    font-size: 17px;
+    font-size: 16px;
 }
 
 quote c {
@@ -65,13 +65,14 @@ i {
     padding: 0 3px 0 0;
 }
 
-a, .link {
+main a, .link, main a * {
     color: #3993dd;
     transition: 0.3s;
+    text-decoration: none;
 }
 
-a:hover, .link:hover {
-    color: #6eb9ff;
+main a:hover, .link:hover, main a:hover * {
+    color: #8cc9ff;
 }
 
 main li::marker {
@@ -80,12 +81,12 @@ main li::marker {
 
 main h1 {
     margin: 40px 0 20px 0;
-    font-size: 36px;
+    font-size: 32px;
 }
 
 main h2 {
     margin: 40px 0 20px 0;
-    font-size: 30px;
+    font-size: 28px;
 }
 
 main h3 {

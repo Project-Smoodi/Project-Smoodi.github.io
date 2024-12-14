@@ -16,6 +16,16 @@ document-table {
     background-color: #2d2d2d;
 
     overflow-y: scroll;
+
+    color: #eeeeee;
+}
+
+document-table a * {
+    color: #eeeeee;
+}
+
+document-table a *:hover, document-table a:hover * {
+    color: #eeeeee;
 }
 
 document-table::-webkit-scrollbar-thumb {
@@ -54,10 +64,6 @@ document-table-folder {
 
     text-decoration-line: none;
     transition: 0.3s;
-}
-
-.document-table-folder-name * {
-    font-size: 20px;
 }
 
 document-table-folder-contents {
