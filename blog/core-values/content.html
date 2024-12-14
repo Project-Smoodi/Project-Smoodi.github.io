@@ -1,0 +1,63 @@
+<en>
+    <unsupported></unsupported>
+</en>
+<ko>
+    <content-table></content-table>
+
+    <info title="Smoodi가 추구하는 가치"
+          year="2024" month="12" day="11" hour="23"></info>
+
+    <br/>
+    <img src="/public/banner.png" alt="banner">
+
+    <h1>1. Smoodi가 추구하는 설계</h1>
+
+    <h2>1.1 아키텍처</h2>
+    <p>Smoodi의 모든 구성 요소는 기본적으로 단방향 의존성을 가집니다. 또한 철저히 객체 지향 5원칙에 기초한 아키텍처를 구성하고자 합니다.</p>
+
+    <h2>1.2 객체</h2>
+    <p>정의 자체는 거창할 것 없이 일반적인 객체의 정의와 어느정도 일치합니다. 변수 등의 <b>상태<sup>state</sup></b>를 가지며, 다른 대상과
+        <b>통신<sup>Messaging</sup></b>하기 위한 <b>프로시저<sup>Procedure&nbsp;(Function,&nbsp;Method)</sup></b>로 구성된 그 객체를 말합니다.
+    </p>
+    <p>하지만 프로그래밍 언어에서 말하는 객체와는 조금 차이점이 있습니다.</p>
+
+    <br/>
+    <h3>Smoodi의 객체</h3>
+    <p></p>
+    <p>Smoodi가 바라보는 <b>객체 지향 프로그래밍<sup>OOP,&nbsp;Object-Oriented
+        Programming</sup></b>의 <b>객체<sup>Object</sup></b>에 대한 <b>가치관</b>을 풀어보겠습니다.</p>
+
+    <p>Smoodi의 객체는 프로그래밍 언어에 국한된 개념이 아니라, 그 본질을 다룹니다.</p>
+
+    <p><b><i>Java</i></b>와 같은 부류의 언어들은 <c>class</c> 키워드를 이용해 클래스를 정의하고 <c>new</c> 키워드와 생성자를 호출해 인스턴스로 만듭니다. 이것이 언어와
+        문법에서의 객체입니다.</p>
+    <p>이 경우엔 보통 클래스를 통해 객체를 바라봅니다. 객체를 만들기 위한 설계도가 클래스가 됩니다.</p>
+
+
+    <h3>Singleton</h3>
+    <p>Smoodi에서 <c>@Module</c>을 통해 정의되는 <b>객체<sup>Object</sup></b>는 모두 <b>싱글톤<sup>Singleton</sup></b>입니다. 필요에 따라 여러 객체를
+        등록할 수는 있으나, 편리하게 등록하는 방법은 따로 제공되지 않습니다.</p>
+    <p>일반적인 객체는 한 번만 사용하고 다시 만드는 것보다 계속 재사용할 수 있도록 하는 것이 낫습니다. 보통의 HTTP 서버는 <b>무상태성<sup>Stateless</sup></b>이 기본이기 때문에,
+        객체 또한 상태를 저장하지 않는 경우가 대부분이라 재사용되어도 괜찮습니다. 따라서 생성과 제거를 반복하며 메모리에 부담을 주기보다 객체를 재사용하는 것이 더욱 효율적입니다.</p>
+    <br/>
+
+    <br/>
+
+    <p>Smoodi의 IoC 컨테이너에서 관리하는 객체는 <b>Immutable<sup>불변</sup></b>이며, <b>Stateless<sup>무상태성</sup></b>하고, <b>NullSafe<sup>Null&nbsp;안전</sup></b>로
+        작성되었다고 가정합니다.</p>
+    <p>풀어 쓰자면,</p>
+    <ol>
+        <li><i>Immutable</i>
+            <p>변수, Reflection 같은 상태, 메소드의 구동 방식 등이 변하지 않는다고 가정합니다.</p></li>
+        <li><i>Stateless</i>
+            <p>다른 객체와 상호작용한 이력을 기억하거나, 다음의 상호작용에 반영하지 않는다고 가정합니다.</p></li>
+        <li><i>NullSafe</i>
+            <p>객체의 구성 요소는 null이 아님이 보장된다고 가정합니다.</p></li>
+    </ol>
+
+    <p>이러한 설계 가치관은
+        <a href="/docs/smoodi-core/what-is-constructor-di">생성자 DI</a>,
+        <a href="/blog/di-constructor-ioc-container-enviorment-circular-dependency">순환 참조 처리 방식</a>
+        등에 녹아나 있습니다.</p>
+
+</ko>
