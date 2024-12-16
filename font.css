@@ -72,7 +72,7 @@ i {
 .link {
     color: #3993dd;
     transition: 0.3s;
-    text-decoration: none;
+    text-decoration-line: underline;
 }
 
 .link:hover {
