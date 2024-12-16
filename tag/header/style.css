@@ -13,10 +13,6 @@ header {
     align-items: center;
 }
 
-header * {
-    text-decoration-line: none;
-}
-
 .header-logo {
     display: flex;
     flex-direction: row;

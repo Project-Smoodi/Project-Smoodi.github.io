@@ -20,14 +20,6 @@ document-table {
     color: #eeeeee;
 }
 
-document-table a * {
-    color: #eeeeee;
-}
-
-document-table a *:hover, document-table a:hover * {
-    color: #eeeeee;
-}
-
 document-table::-webkit-scrollbar-thumb {
     border: 5px solid #2d2d2d;
 }

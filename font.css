@@ -54,6 +54,10 @@ p, a, li, p * {
     height: min-content;
 }
 
+a {
+    text-decoration-line: none;
+}
+
 sub, sup {
     padding: 0 3px 0 0;
     font-size: 75%;
@@ -65,13 +69,13 @@ i {
     padding: 0 3px 0 0;
 }
 
-main a, .link, main a * {
+.link {
     color: #3993dd;
     transition: 0.3s;
     text-decoration: none;
 }
 
-main a:hover, .link:hover, main a:hover * {
+.link:hover {
     color: #8cc9ff;
 }
 
