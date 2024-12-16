@@ -12,13 +12,4 @@ export function loadHeader() {
     } else {
         document.getElementsByClassName("header-logo-text")[0].textContent = "Project Smoodi";
     }
-
-    document.querySelector(".header-logo").addEventListener("click", goToHome);
-    document.querySelector("#home").addEventListener("click", goToHome);
-
-    function goToHome(event) {
-        event.stopPropagation();
-        event.preventDefault();
-        location.pathname = "/"
-    }
 }

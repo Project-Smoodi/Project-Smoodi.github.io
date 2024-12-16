@@ -18,12 +18,6 @@ export function loadFolderNames() {
 
     folders.forEach(element => {
         element.prepend(toFolderName(element));
-        element.firstElementChild.addEventListener("click", event => {
-            event.stopPropagation();
-            event.preventDefault();
-
-            location.pathname = element.getAttribute("fullname");
-        })
     })
 
     const folderContentsElements = document.querySelectorAll("document-table-folder-contents");
@@ -34,12 +28,6 @@ export function loadFolderNames() {
             const anchor = folderContents.children[i];
             if (anchor.nodeName === "A") {
                 anchor.prepend(itemImg());
-                anchor.addEventListener("click", event => {
-                    event.stopPropagation();
-                    event.preventDefault();
-
-                    location.pathname = new URL(anchor.href).pathname + "/";
-                });
             }
         }
     })

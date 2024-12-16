@@ -1,27 +1,29 @@
-import {firstOrSecondIfNull} from "/utility.js";
-
 export const SUPPORT_LANGUAGES = ["ko", "en"];
 export const DEFAULT_LANGUAGE = "ko"
-export const LANGUAGE_CONFIG_PARAM_NAME = "lang"
-
-let lang = undefined;
+export const LANGUAGE_CONFIG_KEY = "lang"
 
 export function getUserLanguage() {
-    if (lang === undefined) {
-        lang = firstOrSecondIfNull(
-            new URL(location.href).searchParams.get(LANGUAGE_CONFIG_PARAM_NAME),
-            DEFAULT_LANGUAGE
-        );
 
-        redirectIfUnsupportedLanguage();
+    loadParamLanguageIfGot()
+
+    if (getLanguage() == null) {
+        setLanguage(DEFAULT_LANGUAGE)
     }
 
-    return lang;
+    return getLanguage();
 }
 
-function redirectIfUnsupportedLanguage() {
-    if (!SUPPORT_LANGUAGES.includes(getUserLanguage())) {
-        setLanguage(DEFAULT_LANGUAGE);
+function loadParamLanguageIfGot() {
+    let langParam = new URL(location.href).searchParams.get(LANGUAGE_CONFIG_KEY);
+    if (langParam != null) {
+        setLanguage(langParam)
+        setToDefaultIfUnsupportedLanguage();
+    }
+
+    function setToDefaultIfUnsupportedLanguage() {
+        if (!SUPPORT_LANGUAGES.includes(getLanguage())) {
+            setLanguage(DEFAULT_LANGUAGE);
+        }
     }
 }
 
@@ -34,20 +36,28 @@ export function applyLanguageConfig() {
             value.remove();
         })
     })
-
-    console.log("Language config applied: " + getUserLanguage());
 }
 
 export function changeLanguage() {
     if (getUserLanguage() === "ko") {
         setLanguage("en");
     } else {
-        setLanguage("ko")
+        setLanguage("ko");
     }
+
+    const url = new URL(location.href);
+    url.searchParams.set(LANGUAGE_CONFIG_KEY, getLanguage());
+    location.href = url.toString();
 }
 
-export function setLanguage(language) {
-    const url = new URL(location.href);
-    url.searchParams.set(LANGUAGE_CONFIG_PARAM_NAME, language);
-    location.href = url.toString();
+function setLanguage(language) {
+    localStorage.setItem(LANGUAGE_CONFIG_KEY, language);
+}
+
+function getLanguage() {
+    return localStorage.getItem(LANGUAGE_CONFIG_KEY);
+}
+
+function reloadLanguageConfig() {
+
 }
