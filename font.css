@@ -41,13 +41,12 @@ quote c {
     background-color: #222222;
 }
 
-ol {
-    margin: 10px 0;
-}
-
 ol, ul {
+    display: flex;
+    flex-direction: column;
+
     padding: 0 0 0 40px;
-    gap: 10px;
+    gap: 5px;
 }
 
 p, a, li, p * {
