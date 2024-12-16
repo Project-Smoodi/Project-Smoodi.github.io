@@ -30,11 +30,19 @@ function loadParamLanguageIfGot() {
 export function applyLanguageConfig() {
     const otherLanguages = SUPPORT_LANGUAGES.filter(item => item !== getUserLanguage());
 
-    otherLanguages.forEach(item => {
-        const it = document.querySelectorAll(item);
+    otherLanguages.forEach(lang => {
+        const it = document.querySelectorAll(lang);
         it.forEach((value) => {
             value.remove();
         })
+    })
+    const startTag = `<${getUserLanguage()}>`;
+    const endTag = `</${getUserLanguage()}>`;
+    document.querySelectorAll(getUserLanguage()).forEach(element => {
+        if (element.parentElement == null) {
+            return;
+        }
+        element.parentElement.innerHTML = element.parentElement.innerHTML.split(startTag).join("").split(endTag).join("");
     })
 }
 
