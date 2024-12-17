@@ -1,5 +1,6 @@
 import {applyLanguageConfig} from "/language.js";
 import {loadCustomTags} from "/tag/custom-tag-loader.js";
+import {upgradeInnerAnchorScroll} from "/document-utility.js";
 
 let main;
 
@@ -25,6 +26,7 @@ export async function loadContents() {
     })
 
     await loadCustomTags()
+    upgradeInnerAnchorScroll();
 }
 
 async function notfound() {

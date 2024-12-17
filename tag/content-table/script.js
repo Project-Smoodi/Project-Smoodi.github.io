@@ -1,3 +1,5 @@
+import {scrollToTarget} from "/document-utility.js";
+
 export function loadSidebarContents() {
     const titles = document.querySelectorAll("h1, h2, h3, h4, h5, h6");
     const table = document.querySelector("content-table");
@@ -27,13 +29,4 @@ export function loadSidebarContents() {
 
         table.appendChild(tableContent)
     })
-}
-
-function scrollToTarget(event) {
-    event.preventDefault();
-    const targetElement = document.querySelector(event.target.href);
-    targetElement.scrollIntoView({
-        behavior: "smooth",
-        block: "center"
-    });
 }
