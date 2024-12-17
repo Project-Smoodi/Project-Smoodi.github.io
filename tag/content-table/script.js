@@ -29,7 +29,7 @@ export function loadSidebarContents() {
     })
 }
 
-export function scrollToTarget(event) {
+function scrollToTarget(event) {
     event.preventDefault();
     const targetElement = document.querySelector(event.target.href);
     targetElement.scrollIntoView({
