@@ -6,14 +6,11 @@ export function loadFolderNames() {
 
     if (path.length > 1) {
         const forDelete = [];
-        let target;
         folders.forEach((folder, key) => {
             if (!folder.getAttribute("fullname").startsWith(path)) {
                 forDelete.push(key);
-            } else {
-                if (folder.getAttribute("fullname") === path)  {
-                    document.querySelector("document-table").appendChild(target);
-                }
+            } else if (folder.getAttribute("fullname") === path) {
+                document.querySelector("document-table").appendChild(folder);
             }
         })
 
