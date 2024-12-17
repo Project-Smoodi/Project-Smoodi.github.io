@@ -6,12 +6,14 @@ export function loadSidebarContents() {
         return;
     }
 
-    if (titles.length=== 0) {
+    if (titles.length === 0) {
         document.querySelector("content-table").remove();
     }
 
     titles.forEach((title, key) => {
-        title.id = "title-" + key;
+        if (!title.id) {
+            title.id = "title-" + key;
+        }
 
         const tableContent = document.createElement("div");
         tableContent.role = "button"
@@ -27,7 +29,7 @@ export function loadSidebarContents() {
     })
 }
 
-function scrollToTarget(event) {
+export function scrollToTarget(event) {
     event.preventDefault();
     const targetElement = document.querySelector(event.target.href);
     targetElement.scrollIntoView({
