@@ -11,12 +11,12 @@ export function loadFolderNames() {
             if (!folder.getAttribute("fullname").startsWith(path)) {
                 forDelete.push(key);
             } else {
-                target = folder;
+                if (folder.getAttribute("fullname") === path)  {
+                    document.querySelector("document-table").appendChild(target);
+                }
             }
         })
-        if (target) {
-            document.querySelector("document-table").appendChild(target);
-        }
+
         forDelete.reverse().forEach(it => {
             folders[it].remove();
         })
