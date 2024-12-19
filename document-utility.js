@@ -9,8 +9,15 @@ export function upgradeInnerAnchorScroll() {
 export function scrollToTarget(event) {
     event.preventDefault();
     event.stopPropagation();
-    const targetElement = document.querySelector("#" + event.target.href.split("#")[1]);
-    targetElement.scrollIntoView({
+
+    let target = event.target;
+    while (target.tagName.toLowerCase() !== "a" && target.role !== "button") {
+        target = target.parentElement;
+    }
+
+    console.log(target.href.split("#"));
+    target = document.querySelector("#" + target.href.split("#")[1]);
+    target.scrollIntoView({
         behavior: "smooth",
         block: "center"
     });
