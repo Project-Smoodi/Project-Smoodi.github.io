@@ -60,8 +60,15 @@ a {
 sub, sup {
     padding: 0 3px 0 0;
     font-size: 75%;
-    font-style: italic;
     color: #ffffff;
+}
+
+sup {
+    font-style: italic;
+}
+
+sub *, sup * {
+    font-size: 100%;
 }
 
 i {
