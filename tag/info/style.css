@@ -1,4 +1,5 @@
 info {
+    z-index: 200;
     position: static;
     display: flex;
     flex-direction: column;

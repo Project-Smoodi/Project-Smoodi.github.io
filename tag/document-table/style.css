@@ -1,4 +1,6 @@
 document-table {
+    z-index: 200;
+
     position: fixed;
     right: 20%;
     top: 15%;

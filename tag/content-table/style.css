@@ -1,4 +1,6 @@
 content-table {
+    z-index: 200;
+
     position: fixed;
     right: 3%;
     top: 120px;

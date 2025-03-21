@@ -4,6 +4,8 @@ pre {
 }
 
 code-block {
+    z-index: 300;
+
     display: flex;
     flex-direction: column;
     width: 100%;

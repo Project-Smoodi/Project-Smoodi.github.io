@@ -5,6 +5,7 @@ import {loadCodeBlock} from "/tag/code/script.js";
 import {loadInfo} from "/tag/info/script.js";
 import {loadFolderNames} from "/tag/document-table/script.js";
 import {loadSidebarContents} from "/tag/content-table/script.js";
+import {settingBackgroundImage} from "/tag/background-image/script.js";
 
 export async function loadCustomTags() {
 
@@ -30,6 +31,10 @@ export async function loadCustomTags() {
     if (document.querySelector("header") != null) {
         await setHTMLContent("/tag/header/content.html", "header");
         loadHeader();
+    }
+
+    if (document.querySelector("background-image") != null) {
+        settingBackgroundImage();
     }
 
     hljs.highlightAll();

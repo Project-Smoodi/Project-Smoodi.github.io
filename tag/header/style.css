@@ -1,4 +1,6 @@
 header {
+    z-index: 1000;
+
     position: fixed;
     display: flex;
     flex-direction: row;

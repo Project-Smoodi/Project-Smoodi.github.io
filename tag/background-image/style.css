@@ -1,0 +1,36 @@
+background-image {
+    z-index: 50;
+}
+
+background-image-description {
+    z-index: 300;
+
+    font-size: 20px;
+
+    position: fixed;
+
+    display: flex;
+    height: 30px;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+
+    padding: 20px 30px;
+    background: #222222;
+    border-radius: 20px;
+}
+
+
+background-image-inner {
+    z-index: 50;
+
+    position: fixed;
+    top: 80px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    width: 100vw;
+    opacity: 0;
+}
