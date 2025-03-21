@@ -78,12 +78,14 @@ function calculateOpacity() {
             const child = children[i];
             if ((tagY > yQuarters) && (tagY < yQuarters * 3)) {
                 child.style.opacity = "1";
-            } else {
+            } else if (tagY > 0 && tagY < yQuarters * 4) {
                 if (tagY > 0 && tagY < yQuarters * 2) {
-                    child.style.opacity = tagY / yQuarters - 0.2 + "";
+                    child.style.opacity = tagY / yQuarters + "";
                 } else if (tagY > yQuarters * 3 && tagY < yQuarters * 5) {
-                    child.style.opacity = yQuarters / (tagY - yQuarters * 3) - 0.2 + "";
+                    child.style.opacity = yQuarters / (tagY - yQuarters * 3) + "";
                 }
+            } else {
+                child.style.opacity = "0";
             }
         }
     }
