@@ -80,9 +80,9 @@ function calculateOpacity() {
                 child.style.opacity = "1";
             } else {
                 if (tagY > 0 && tagY < yQuarters * 2) {
-                    child.style.opacity = tagY / yQuarters + "";
+                    child.style.opacity = tagY / yQuarters - 0.2 + "";
                 } else if (tagY > yQuarters * 3 && tagY < yQuarters * 5) {
-                    child.style.opacity = yQuarters / (tagY - yQuarters * 3) + "";
+                    child.style.opacity = yQuarters / (tagY - yQuarters * 3) - 0.2 + "";
                 }
             }
         }
