@@ -31,7 +31,7 @@ function description(tag) {
     description.appendChild(imgIcon);
 
     const p = document.createElement("p");
-    p.innerHTML = "<ko>첨부 사진 - </ko><en>attached Image - </en>" + text;
+    p.innerHTML = "<ko>배경 사진 첨부 - </ko><en>attached Image - </en>" + text;
     p.style.whiteSpace = "nowrap";
     description.appendChild(p);
 
@@ -52,7 +52,7 @@ function calculateDescriptionX() {
     for (let i = 0; i < tags.length; i++) {
         const tag = tags[i];
         const description = document.querySelector(`background-image-description.${tag.getAttribute("src")}`);
-        description.style.left = document.querySelector("main").getBoundingClientRect().left - description.clientWidth / 1.4 + "px";
+        description.style.left = document.querySelector("main").getBoundingClientRect().left - description.clientWidth / 1.3 + "px";
     }
 }
 
