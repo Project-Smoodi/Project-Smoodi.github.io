@@ -5,25 +5,68 @@
           year="2025" month="03" day="32" hour="12"></info>
 
     <h1>1. Physalus, The Engine.</h1>
-    <p><i>Physalus</i>란 Project Smoodi를 위해 설계, 제작된 WAS 엔진입니다.</p>
-    <p>Smoodi를 이용한 서버 애플리케이션은 모두 <i>Physalus</i>를 기반으로 동작하게 됩니다.</p>
+    <p><i>Physalus</i>는 <i>Project Smoodi</i>를 위해 설계, 제작된 WAS 엔진입니다.</p>
+    <p><i>Smoodi</i>를 이용한 서버 애플리케이션은 모두 <i>Physalus</i>를 기반으로 동작하게 됩니다.</p>
 
-    <h3>이름의 뜻</h3>
-    <background-image src="whale">
-        참고래
-    </background-image>
-    <p><i>Physalus</i>는 참고래, 학명 "<i><b>Balaenoptera physalus</b></i>"에서 따 온 이름입니다.</p>
-    <p>가장 크고, 또 가장 빠른 고래 종류 중 하나입니다. 대왕고래<sup>흰긴수염고래</sup>에도 비견될만한 거대한 몸집, 그리고 그에 대비되는 매우 빠른 속도로 헤엄칩니다.</p>
-    <p>그러한 참고래의 특징을 따라, 거대한 몸집처럼 믿음직스럽고, 그럼에도 빠르고, 근엄하게 바다를 누비듯 위대한 WAS 엔진을 만들고자 <i>Physalus</i>라는 이름을 붙이게 되었습니다.
-    </p>
+    <quote>
+        <h3 style="margin-top: 0;">🐳 Physalus는 무슨 뜻인가요?</h3>
+        <background-image src="whale">
+            참고래
+        </background-image>
+        <p><i>Physalus</i>는 참고래, 학명 "<i><b>Balaenoptera physalus</b></i>"에서 따 온 이름입니다.</p>
+        <p>가장 크고, 또 가장 빠른 고래 종류 중 하나입니다. 대왕고래<sup>흰긴수염고래</sup>에도 비견될만한 거대한 몸집, 그리고 그에 대비되는 매우 빠른 속도로 헤엄칩니다.</p>
+        <p>그러한 참고래의 특징을 따라, 거대한 몸집처럼 믿음직스럽고, 그럼에도 빠르고, 근엄하게 바다를 누비듯 위대한 WAS 엔진을 만들고자 <i>Physalus</i>라는 이름을 붙이게 되었습니다.
+        </p>
+    </quote>
 
-    <h1>2. Physalus의 구조</h1>
+    <h1>2. Socket API 기반의 HTTP 프로토콜</h1>
+    <p>Physalus는 다른 HTTP 모듈의 도움 없이, 오로지 <c>java.net.Socket</c>, 즉 TCP 프로토콜만을 가지고 제작되었습니다.</p>
+    <p>그렇기에 요청 문자열 파싱, 응답으로의 직렬화 알고리즘 등 HTTP 통신을 위한 기틀을 직접 마련했습니다.</p>
+
+    <h1>3. Physalus의 구조</h1>
     <p><i>Physalus</i>는 크게 세 부분으로 나뉘어집니다:</p>
     <ol>
-        <li>ServerRuntime: 실제 HTTP 서버가 존재하는 모듈</li>
-        <li>MainController:</li>
-        <li>AdapterManager</li>
+        <li><c>ServerRuntime</c>: 실제 HTTP 서버가 존재하는 모듈</li>
+        <li><c>AdapterManager</c>: 실제로 요청을 처리하고 응답을 반환하는 <c>Adapter</c>의 관리자</li>
+        <li><c>MainController</c>: <c>ServerRuntime</c>과 <c>AdapterManager</c> 사이에서 통신을 조율하며 <c>Filter</c>를 실행하는 모듈</li>
     </ol>
+
+    <h2>3.1 ServerRuntime</h2>
+    <p>HTTP 요청을 기다리는 Listening 서버가 실제로 위치한 모듈입니다.</p>
+    <p>지정된 포트에서 클라이언트가 요청을 보낼 때까지 대기합니다. 요청이 들어올 경우 요청의 형식에 따라 Java 객체로 변환하여 <c>MainController</c>에게 전송합니다.</p>
+    <quote>
+        <p><i>Physalus</i>는 HTTP 뿐만 아니라 다양한 프로토콜을 수용할 수 있도록 설계되었습니다.</p>
+        <p>따라서 요청(혹은 메세지)가 어떤 프로토콜에 기하느냐에 따라 Java 객체로의 변환도 다르게 처리됩니다. 그렇기에 내부적으로 사용되는 VO 또한 <c>Exchange</c>,
+            <c>Request</c>, <c>Response</c>와 같이 극히 추상화되어 있습니다.</p>
+    </quote>
+
+    <h2>3.2 AdapterManager</h2>
+    <p><c>Adapter</c>들을 관리하는 모듈입니다. 그리고, 실제로 HTTP 요청을 처리하는 곳이기도 합니다.</p>
+
+    <h3>3.2.1 Adapter</h3>
+    <p><c>Adapter</c>는 요청을 처리하고, 응답을 반환하는 인터페이스입니다.</p>
+    <p>인터페이스 뒤에는 요청을 처리하기 위해 작성된 애플리케이션이 위치합니다. <i>Smoodi-Web</i>을 통해 구성된 HTTP 백엔드 애플리케이션이 가장 대표적인 예시입니다.</p>
+    <p><c>Adapter</c>의 메소드는 두 개입니다; 주어진 요청을 처리할 수 있는 지의 여부를 반환하는 메소드, 그리고 요청을 처리하는 메소드입니다.</p>
+
+    <h3>3.2.2 동작 원리</h3>
+    <p>두 번째 메소드에 집중해봅시다. 더 자세히 그 안을 들여다보면, 통일된 <c>Adapter</c> 인터페이스를 통해 애플리케이션으로 향하는 진입점을 감싸고 있습니다.</p>
+    <p>모든 프로그래밍 언어는 main 함수가 존재합니다. 프로그램을 실행하기 위한 진입점입니다.</p>
+    <p>동일하게, '요청을 처리할 수 있는 애플리케이션' 또한 진입점이 있습니다.(<i>Smoodi-Web</i>의 경우는, <c>Gateway</c>입니다.)</p>
+    <p>그리고 <c>Adapter</c>는 그 진입점을 동일한 인터페이스로 통일합니다. 어떤 애플리케이션이든, 예를 들면 <i>Smoodi-Web</i>이든, <c>CONNECT</c> HTTP 메소드를
+        처리하는 시스템이든, 모두 <c>Adapter</c> 인터페이스로 통일됩니다.</p>
+    <p>5V 스마트폰 충전기든, 9V 모니터 전원이든, 모두 220V 콘센트와 연결할 수 있게 해주는 어댑터처럼 말입니다.</p>
+
+    <h2>3.3 MainController</h2>
+    <p><c>MainController</c>는 <c>ServerRuntime</c>으로부터 요청을 받고, <c>AdapterManager</c>에게 넘깁니다. 또한, <c>Adapter</c>에게 넘기기
+        전후에 추가적인 처리를 하기도 합니다.</p>
+    <p>추가적인 처리라 함은, 비즈니스 로직과는 크게 관련되지 않은, 그러나 모든 응답(혹은 일부)에 대해 추가적으로 가공이 필요한 경우에 수행되는 로직을 말합니다.</p>
+    <p>마치 <b>과자를 만들어 포장</b><sup>비즈니스 로직</sup>한 이후에, <b>유통기한을 표시</b><sup>추가 처리</sup>하는 것과 같습니다.</p>
+
+    <h3>3.3.1 Filter</h3>
+    <p>그리고 그 추가적인 처리를 수행하는 모듈이 <c>Filter</c>입니다. <i>JEE</i><sup>Java Enterprise Edition</sup>의 표준 기술 중 하나입니다. 다만, <i>Smoodi</i>에
+        맞추어 커스텀되었습니다.</p>
+
+
 </ko>
 <en>
     <unsupported></unsupported>
