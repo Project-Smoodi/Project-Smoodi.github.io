@@ -1,7 +1,11 @@
-export let tags
+export let tags;
+let main;
 
 export function settingBackgroundImage() {
     tags = document.getElementsByTagName("background-image");
+    main = document.getElementsByTagName("main").item(0);
+
+    prepareAnimationClass();
 
     for (let i = 0; i < tags.length; i++) {
         const tag = tags[i];
@@ -19,8 +23,18 @@ export function settingBackgroundImage() {
     });
 }
 
+function prepareAnimationClass() {
+    main.style.transition = "0.2s"
+}
+
 function description(tag) {
     const description = document.createElement("background-image-description");
+    description.addEventListener("mouseenter", () => {
+        main.style.opacity = "0";
+    });
+    description.addEventListener("mouseleave", () => {
+        main.style.opacity = "1";
+    });
     description.className = tag.getAttribute("src");
 
     const imgIcon = document.createElement("img");
@@ -62,7 +76,6 @@ function calculateDescriptionY() {
         const description = document.querySelector(`background-image-description.${tag.getAttribute("src")}`);
 
         description.style.top = tag.getBoundingClientRect().y - 50 + "px";
-        console.log(description.top, tag.getBoundingClientRect().y);
     }
 }
 
@@ -89,4 +102,8 @@ function calculateOpacity() {
             }
         }
     }
+}
+
+function descriptionHover() {
+    main.style.opacity = "0";
 }
