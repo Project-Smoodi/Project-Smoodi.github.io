@@ -12,11 +12,14 @@ html, body {
     padding: 0;
     margin: 0;
     align-items: center;
-    gap: 100px;
 
     background-color: #222222;
 
     scroll-behavior: smooth;
+}
+
+body {
+    gap: 100px;
 }
 
 *::-webkit-scrollbar {
