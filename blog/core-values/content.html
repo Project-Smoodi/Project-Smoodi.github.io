@@ -11,6 +11,7 @@
     <img src="/public/banner.png" alt="banner">
 
     <h1>1. Smoodi가 추구하는 설계</h1>
+    <p></p>
 
     <h2>1.1 아키텍처</h2>
     <p>Smoodi의 모든 구성 요소는 기본적으로 단방향 의존성을 가집니다. 또한 철저히 객체 지향 5원칙에 기초한 아키텍처를 구성하고자 합니다.</p>
@@ -23,41 +24,47 @@
 
     <br/>
     <h3>Smoodi의 객체</h3>
-    <p></p>
+    <p>Smoodi의 객체는 프로그래밍 언어에 국한된 개념이 아니라, 그 본질을 다룹니다.</p>
     <p>Smoodi가 바라보는 <b>객체 지향 프로그래밍<sup>OOP,&nbsp;Object-Oriented
         Programming</sup></b>의 <b>객체<sup>Object</sup></b>에 대한 <b>가치관</b>을 풀어보겠습니다.</p>
 
-    <p>Smoodi의 객체는 프로그래밍 언어에 국한된 개념이 아니라, 그 본질을 다룹니다.</p>
-
-    <p><b><i>Java</i></b>와 같은 부류의 언어들은 <c>class</c> 키워드를 이용해 클래스를 정의하고 <c>new</c> 키워드와 생성자를 호출해 인스턴스로 만듭니다. 이것이 언어와
-        문법에서의 객체입니다.</p>
-    <p>이 경우엔 보통 클래스를 통해 객체를 바라봅니다. 객체를 만들기 위한 설계도가 클래스가 됩니다.</p>
+    <br/>
+    <p><b><i>Java</i></b>와 같은 부류의 언어들은 <c>class</c> 키워드를 이용해 클래스를 정의하고,
+        <c>new</c> 키워드와 생성자를 호출해 인스턴스로 만듭니다. 이것이 언어와 문법에서의 객체입니다.</p>
+    <p>이 경우엔 클래스를 통해 객체를 바라봅니다. 그리고는 은연 중에 객체 그 자체보다, 클래스를 중요하게 여기게 됩니다. 무언가 이상하지 않나요?</p>
 
 
     <h3>Singleton</h3>
-    <p>Smoodi에서 <c>@Module</c>을 통해 정의되는 <b>객체<sup>Object</sup></b>는 모두 <b>싱글톤<sup>Singleton</sup></b>입니다. 필요에 따라 여러 객체를
-        등록할 수는 있으나, 편리하게 등록하는 방법은 따로 제공되지 않습니다.</p>
+    <p>Smoodi에서 <c>@Module</c>을 통해 정의되는 <b>객체<sup>Object</sup></b>, 정확히는 <b><a href="/docs/smoodi-core/what-is-module">모듈<sup>Module</sup></a></b>들은
+        모두 <b>싱글톤<sup>Singleton</sup></b>입니다. 필요에 따라 여러 객체를
+        등록할 수는 있으나, 간단하게 등록하는 방법은 제공하지 않습니다.</p>
     <p>일반적인 객체는 한 번만 사용하고 다시 만드는 것보다 계속 재사용할 수 있도록 하는 것이 낫습니다. 보통의 HTTP 서버는 <b>무상태성<sup>Stateless</sup></b>이 기본이기 때문에,
         객체 또한 상태를 저장하지 않는 경우가 대부분이라 재사용되어도 괜찮습니다. 따라서 생성과 제거를 반복하며 메모리에 부담을 주기보다 객체를 재사용하는 것이 더욱 효율적입니다.</p>
-    <br/>
+    <p>이에 따라 Smoodi에서는 모듈을 단일 인스턴스의 형태로 작성할 것을 강력히 권고합니다.</p>
 
-    <br/>
-
-    <p>Smoodi의 IoC 컨테이너에서 관리하는 객체는 <b>Immutable<sup>불변</sup></b>이며, <b>Stateless<sup>무상태성</sup></b>하고, <b>NullSafe<sup>Null&nbsp;안전</sup></b>로
+    <h3>객체의 특성</h3>
+    <p>Smoodi의 IoC 컨테이너에서 관리하는 객체는 <b>Immutable<sup>불변</sup></b>이며, <b>Stateless<sup>무상태</sup></b>하고, <b>NullSafe<sup>Null&nbsp;안전</sup></b>로
         작성되었다고 가정합니다.</p>
     <p>풀어 쓰자면,</p>
     <ol>
-        <li><i>Immutable</i>
+        <li><b>Immutable</b>
             <p>변수, Reflection 같은 상태, 메소드의 구동 방식 등이 변하지 않는다고 가정합니다.</p></li>
-        <li><i>Stateless</i>
+        <li><b>Stateless</b>
             <p>다른 객체와 상호작용한 이력을 기억하거나, 다음의 상호작용에 반영하지 않는다고 가정합니다.</p></li>
-        <li><i>NullSafe</i>
-            <p>객체의 구성 요소는 null이 아님이 보장된다고 가정합니다.</p></li>
+        <li><b>NullSafe</b>
+            <p>객체의 구성 요소는 <c>null</c>이 아님이 보장된다고 가정합니다.</p></li>
     </ol>
 
+    <quote>
+        모듈의 특성에 관한 더 자세한 내용은 <a class="link" href="/docs/smoodi-core/what-is-module">이 글</a>을 참고하십시오.
+    </quote>
+
     <p>이러한 설계 가치관은
-        <a href="/docs/smoodi-core/what-is-constructor-di">생성자 DI</a>,
-        <a href="/blog/di-constructor-ioc-container-enviorment-circular-dependency">순환 참조 처리 방식</a>
+        <a class="link" href="/docs/smoodi-core/what-is-constructor-di">생성자 DI</a>,
+        <a class="link" href="/blog/di-constructor-ioc-container-enviorment-circular-dependency">순환 참조 처리 방식</a>
         등에 녹아나 있습니다.</p>
+    <p>Smoodi에서 사용자의 모듈들을 바라볼 때 뿐만 아니라, 사용자가 모듈을 작성할 때에도 이 특성이 적용됩니다.
+        예를 들어서 특정 모듈이 의존하는, 다른 모듈의 인스턴스를 저장하는 변수가 있다 할 때, 이 변수의 값은 사용자가 별다른 조작을 하지 않는 한 <c>null</c>이 아니며 변하지 않을 것이
+        보장됩니다.</p>
 
 </ko>
