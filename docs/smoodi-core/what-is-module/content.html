@@ -10,7 +10,7 @@
     <h1>1. Module</h1>
     <p><b>모듈<sup>Module</sup></b>이란 Smoodi에서 인지하고 있는, 구체적으론
         <a class="link"
-           href="/docs/smoodi-core/what-is-ioc-container">IoC&nbsp;컨테이너</a>
+           href="/docs/smoodi-core/what-is-the-ioc-container">IoC&nbsp;컨테이너</a>
         에 등록되어 있는 객체를 말합니다. 이 모듈에 대한 Smoodi의 다양한 기능을 알아봅시다.</p>
 
     <h2>1.1 더 정확한 정의</h2>
@@ -19,7 +19,7 @@
     <p>이 방식을 <b>IoC,&nbsp;제어의&nbsp;역전<sup>Inversion&nbsp;of&nbsp;Control</sup></b>이라고 부릅니다.</p>
 
     <quote>
-        IoC에 대한 더 자세한 내용은 <a class="link" href="/docs/smoodi-core/what-is-ioc-container">이&nbsp;글</a>을 참고하세요.
+        IoC에 대한 더 자세한 내용은 <a class="link" href="/docs/smoodi-core/what-is-the-ioc-container">이&nbsp;글</a>을 참고하세요.
     </quote>
 
     <p>사용자는 그저 클래스를 정의하고 어노테이션을 부착하면, <b>Smoodi가 자동으로 모듈로 등록</b>합니다.
@@ -177,7 +177,7 @@ public @interface Module { /* ... */ }
         <li>정의된 클래스들을 불러옵니다.</li>
         <li>Reflection API를 통해 <c>@Module</c> 어노테이션을 찾습니다.</li>
         <li>어노테이션이 있을 경우 <b>모듈 초기화 생성자<sup>ModuleInitConstructor</sup></b>를 찾고 초기화합니다.</li>
-        <li>생성된 인스턴스를 <a class="link" href="/docs/smoodi-core/what-is-ioc-container">IoC&nbsp;컨테이너</a>에 등록합니다.</li>
+        <li>생성된 인스턴스를 <a class="link" href="/docs/smoodi-core/what-is-the-ioc-container">IoC&nbsp;컨테이너</a>에 등록합니다.</li>
     </ol>
 
     <h2>2.3 모듈 초기화 생성자</h2>
