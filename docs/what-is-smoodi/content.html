@@ -20,9 +20,47 @@
     <img src="/public/banner.png" alt="banner">
     <h1>The Smoodi Framework</h1>
 
-    <p>Smoodi는 자바 엔터프라이즈 기반의 웹 애플리케이션 서버를 제작하기 위한 프레임워크입니다.</p>
-    <p>Smoodi는 비즈니스 로직 외에 요구되는 애플리케이션 실행의 기반을 제공하여,</p>
-    <p>개발자가 비즈니스 로직에만 집중할 수 있도록 생산성 높은 개발 환경 지원을 목표로 합니다.</p>
+    <p>Smoodi는 Java 환경에서 WAS를 구축하기 위한 <b>독립형</b>, <b>모듈식</b> 프레임워크입니다.</p>
+    <p>비즈니스 로직 외에 필요한 애플리케이션 실행의 기반을 제공하여 개발자가 <b>비즈니스 로직에만 집중</b>할 수 있는 생산성 높은 개발 환경을 지원합니다.</p>
+
+    <h1>1. Smoodi는 어떻게 구현되어 있나요?</h1>
+    <p>Smoodi는 <b>독립형<sup>stand-alone</sup></b> 프레임워크입니다. Smoodi 프레임워크 하나만으로 WAS 애플리케이션을 구현할 수 있습니다.</p>
+    <p>따로 WAS 엔진을 연결하거나, 다른 라이브러리들을 따로 설치할 필요가 없습니다. Smoodi 프레임워크 의존성 하나면 충분합니다.</p>
+
+    <br/>
+
+    <p>Smoodi는 JEE API, Lombok, Slf4j + Logback 등 기본적인 Java 환경에서 몇 개의 편의성 도구를 이용해 구현되었습니다.</p>
+    <p>또한 Lombok, Slf4j 등은 외부에서도 그대로 사용할 수 있습니다.</p>
+    <p></p>
+
+    <h1>2. Smoodi는 어떻게 구성되어 있나요?</h1>
+    <p>큰 틀을 보면, <b><i>Project Smoodi</i></b>라는 프로젝트 아래로</p>
+    <ul>
+        <li><a class="link" href="/docs/physalus/what-is-physalus">WAS Engine - Physalus</a></li>
+        <li><a class="link" href="/docs/smoodi-core">IoC Container - Smoodi-Core</a></li>
+        <li>User Interface - Smoodi-Web</li>
+    </ul>
+    <p>등 여러 하위 프레임워크로 구성됩니다. 모듈화된 여러 프레임워크가 조합되는 모듈식 구조입니다.</p>
+    <p></p>
+
+    <h1>3. Smoodi는 어떤 기능들이 있나요?</h1>
+    <p>위에서 언급한 프레임워크별로 기능을 나열해보겠습니다.</p>
+
+    <h2>3.1 Physalus, The Engine</h2>
+    <p>Physalus는 WAS 엔진입니다. HTTP 요청을 받아 Java 객체로 만들고, 다시 Java 객체를 HTTP 응답으로 작성합니다.</p>
+    <p>이뿐만이 아닙니다. JEE 표준 기술인 FilterChain을 제공하기도 하고, Thread를 이용한 병렬 처리도 제공합니다.</p>
+
+    <quote>
+        Physalus에 관한 더 자세한 내용은 <a class="link" href="/docs/physalus/what-is-physalus">이 글</a>을 참고하십시오.
+    </quote>
+
+    <h2>3.2 Smoodi-Core, 프로젝트의 기반 프레임워크</h2>
+    <p><a class="link" href="/docs/smoodi-core/what-is-ioc-container">IoC 컨테이너 환경, 생성자 DI</a>, 그리고 프레임워크 전체를 하나의 메소드로
+        실행시키는 BootStrap을 제공합니다.</p>
+    <p>프레임워크의 진입점이자, 기반이 됩니다.</p>
+
+    <h2>3.3 Smoodi-Web, API 작성을 위한 유저 인터페이스</h2>
+    <p>실제로 API를 작성하고, 데이터베이스와 통신하는 등 서비스를 만들기 위한, Smoodi의 User Interface입니다.</p>
 
     <h1>어떻게 사용하나요?</h1>
     <p>아래 문서를 참고하여 Smoodi를 시작해보세요.</p>
