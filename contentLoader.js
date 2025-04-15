@@ -6,9 +6,10 @@ let main;
 
 let errored = false;
 
+export const rand = Math.floor(Math.random() * 10000000);
+
 export async function loadContents() {
     main = document.querySelector("main");
-    const rand = Math.floor(Math.random() * 100000);
     const dataFilePath = location.pathname + "content.html?v=" + rand;
 
     await getData(dataFilePath).then(await async function (value) {
