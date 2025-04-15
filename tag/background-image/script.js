@@ -58,7 +58,8 @@ function inner(tag) {
     document.body.appendChild(inner);
 
     inner.style.height = (window.innerHeight - 80) + "px";
-    inner.style.background = `center center / cover no-repeat url(${location.pathname}${tag.getAttribute("src")})`;
+    const rand = Math.floor(Math.random() * 100000);
+    inner.style.background = `center center / cover no-repeat url(${location.pathname}${tag.getAttribute("src")}.png?v=${rand})`;
     inner.style.zIndex = "1";
 }
 
