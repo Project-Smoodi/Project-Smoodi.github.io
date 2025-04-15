@@ -8,7 +8,8 @@ let errored = false;
 
 export async function loadContents() {
     main = document.querySelector("main");
-    const dataFilePath = location.pathname + "content.html?v=202504151";
+    const rand = Math.floor(Math.random() * 100000);
+    const dataFilePath = location.pathname + "content.html?v=" + rand;
 
     await getData(dataFilePath).then(await async function (value) {
         if (value === undefined) {
