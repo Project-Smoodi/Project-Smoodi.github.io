@@ -8,7 +8,7 @@ let errored = false;
 
 export async function loadContents() {
     main = document.querySelector("main");
-    const dataFilePath = location.pathname + "content.html";
+    const dataFilePath = location.pathname + "content.html?v=20250415";
 
     await getData(dataFilePath).then(await async function (value) {
         if (value === undefined) {
