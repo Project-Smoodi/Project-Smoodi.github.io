@@ -7,10 +7,62 @@
     <img src="/public/banner.png" alt="banner">
     <h1>The Smoodi Framework</h1>
 
-    <p>Smoodi is a Java enterprise-based framework for building web application servers.</p>
-    <p>It provides the foundational infrastructure needed to run applications, enabling developers to focus solely on
-        business logic.</p>
-    <p>Smoodi aims to deliver a streamlined and highly productive development environment.</p>
+    <p>Smoodi is a <b>stand-alone</b> and <b>modular</b> framework for building a WAS (Web Application Server)
+        environment in Java.</p>
+    <p>It provides the essential foundation required to run an application, apart from the business logic, enabling
+        developers to <b>focus solely on business logic</b> in a productive development environment.</p>
+
+    <h1>1. How is Smoodi implemented?</h1>
+    <p>Smoodi is a <b>stand-alone<sup>independent</sup></b> framework. You can build a WAS application with just the
+        Smoodi framework.</p>
+    <p>There is no need to connect it to a separate WAS engine or install other libraries individually. A single Smoodi
+        framework dependency is all you need.</p>
+
+    <br/>
+
+    <p>Smoodi is built using essential Java components such as the JEE API, Lombok, and Slf4j + Logback, along with a
+        few convenience tools.</p>
+    <p>Moreover, external tools like Lombok and Slf4j are available for use outside of Smoodi as well.</p>
+
+    <h1>2. How is Smoodi structured?</h1>
+    <p>At a high level, under the umbrella project named <b><i>Project Smoodi</i></b>, the framework consists of several
+        sub-frameworks:</p>
+    <ul>
+        <li><a class="link" href="/docs/physalus/what-is-physalus">WAS Engine - Physalus</a></li>
+        <li><a class="link" href="/docs/smoodi-core">IoC Container - Smoodi-Core</a></li>
+        <li>User Interface - Smoodi-Web</li>
+    </ul>
+    <p>This is a modular structure composed of multiple frameworks combined together.</p>
+
+    <h1>3. What features does Smoodi offer?</h1>
+    <p>The features can be listed per framework mentioned above.</p>
+
+    <h2>3.1 Physalus, The Engine</h2>
+    <p>Physalus is the WAS engine. It handles HTTP requests by converting them into Java objects, and likewise,
+        transforms Java objects into HTTP responses.</p>
+    <p>But that's not all. It also provides the JEE-standard FilterChain and supports parallel processing using
+        Threads.</p>
+
+    <quote>
+        For more details about Physalus, refer to <a class="link" href="/docs/physalus/what-is-physalus">this
+        article</a>.
+    </quote>
+
+    <h2>3.2 Smoodi-Core, the foundational framework</h2>
+    <p>It offers an <a class="link" href="/docs/smoodi-core/what-is-the-ioc-container">IoC container environment,
+        constructor-based DI</a>, and a Bootstrap method that initializes the entire framework.</p>
+    <p>This is the entry point and the foundation of the framework.</p>
+
+    <h2>3.3 Smoodi-Web, the user interface for API development</h2>
+    <p>This is Smoodi's User Interface for building services such as writing APIs and communicating with databases.</p>
+
+    <h1>How do I get started?</h1>
+    <p>Check out the following document to start using Smoodi.</p>
+    <quote>
+        <p>Document: Getting Started with Smoodi</p>
+        <a class="link" href="/docs/getting-started">Smoodi Docs: Getting Started</a>
+    </quote>
+
 </en>
 <ko>
     <info title="Smoodi란 무엇인가요?"

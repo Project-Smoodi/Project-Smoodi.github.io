@@ -1,5 +1,106 @@
 <en>
-    <unsupported></unsupported>
+    <content-table></content-table>
+
+    <info title="What is an IoC Container?" year="2024" month="12" day="13" hour="6"></info>
+
+    <h1>1. Inversion of Control: The Principle of IoC</h1>
+    <p>IoC refers to the concept where a framework or automated system manages user-created objects on behalf of the
+        developer.</p>
+
+    <br/>
+
+    <p>In typical <i>Java</i> or other class-based <b>OOP<sup>Object-Oriented Programming</sup></b> languages,
+        developers must create objects by directly invoking constructors like below:</p>
+    <code-block>
+    <pre><code class="hljs language_java" lang="Java">public class TheClass { ... }
+
+public static void main(String[] args) {
+     TheClass object = new TheClass();
+
+     /* ... */
+}</code></pre>
+    </code-block>
+
+    <p>However, in an IoC framework environment like <i>Smoodi</i>, the code looks quite different:</p>
+
+    <code-block>
+    <pre><code class="hljs language_java" lang="Java">@Module
+public class TheClass { ... }</code></pre>
+    </code-block>
+
+    <p>The key difference is the <c>@Module</c> annotation.</p>
+    <p>With <i>Smoodi</i>, developers can mark classes with <c>@Module</c> to let the framework manage them
+        automatically.</p>
+    <p>As a result, there’s no need to call constructors manually—these objects become self-sufficient and behave
+        according to their intended role.</p>
+
+    <h2>1.1 Object Lifecycle</h2>
+    <p>The full process from <b>creation</b> to <b>destruction</b> of an object is known as the <b>object lifecycle</b>.
+    </p>
+    <p>Smoodi manages this lifecycle on behalf of the developer.</p>
+    <p>Creation more precisely refers to <b>instantiation</b>, where a constructor is invoked and the object is
+        allocated in the heap.</p>
+    <p>Destruction is more complex—it involves memory release, but in reality, the memory is freed only when the object
+        is <b>collected</b> by the <b>GC<sup>Garbage Collector</sup></b>. However, an object becomes unusable much
+        earlier—specifically, when no references to it exist.</p>
+    <p>Therefore, in <i>Smoodi</i>, an object’s <b>lifecycle</b> spans from instantiation to the point when it is no
+        longer referenced by any other object.</p>
+
+    <img src="smoodi-defined_lifecycle.png" alt="Smoodi-Defined Lifecycle"/>
+
+    <h1>2. IoC Container</h1>
+    <p>Now that we understand the concept of IoC, let’s look at the IoC Container itself.</p>
+    <p>An IoC Container is the component that actually implements IoC, acting as a manager and a storage system for
+        framework-managed objects.</p>
+
+    <p>In <i>Smoodi</i>, applying IoC to an object is as simple as adding a <c>@Module</c> annotation.</p>
+    <p>But how does that actually work?</p>
+    <p>This is where the IoC Container shines—it scans for classes annotated with <c>@Module</c> and creates their
+        instances.</p>
+    <p>The core technology behind this process is the <b>Reflection API</b>.</p>
+
+    <h2>2.1 Strongly-Typed Languages</h2>
+    <p>To manipulate any object (i.e., an <b>instance</b>), the program must know its class definition.</p>
+    <p>To call a method or access a field, the code must reference the class and know its structure.</p>
+    <p>Languages like <i>JavaScript</i> are more flexible and don’t require type declarations when storing objects in
+        variables. Internally, objects behave like <c>Map</c>s where properties and methods can be accessed by key.</p>
+    <p>But <i>Java</i> is quite different. Every variable must include type information, and to access object members,
+        the program must use the class definition to locate them in memory.</p>
+    <p>In short, the code must always know and reference the class (or interface).</p>
+
+    <br/>
+
+    <p>This characteristic of <i>Java</i> is known as being <b>strongly-typed</b>. While it ensures stability, it
+        complicates dynamic class management.</p>
+    <p>To address this, Java provides the <i>Reflection API</i>.</p>
+
+    <h2>2.2 Reflection API</h2>
+    <p>Even if the type of an object is unknown at compile-time, you can retrieve its structured class information
+        through simple method calls:</p>
+
+    <code-block>
+    <pre><code class="hljs language_java" lang="Java">Object object = new AnyClass();
+Class&lt;?&gt; classReflection = object.getClass();</code></pre>
+    </code-block>
+
+    <p>Elegant, isn’t it? Now you can access class metadata through Java objects themselves. For example:</p>
+
+    <code-block>
+    <pre><code class="hljs language_java" lang="Java">// Print the class name
+System.out.println(classReflection.getName());
+// Even retrieve the constructors
+Constructor&lt;?&gt;[] constructors = classReflection.getConstructors();
+</code></pre>
+    </code-block>
+
+    <p><i>Smoodi</i> uses the <b>Reflection API</b> to scan and manage annotated classes, implementing its IoC system
+        automatically.</p>
+
+    <br/>
+
+    <p>These scanned classes are instantiated and stored in the IoC Container.</p>
+    <p>The stored instances can then be reused to instantiate other classes—enabling DI (Dependency Injection).</p>
+
 </en>
 <ko>
     <content-table></content-table>
@@ -14,6 +115,7 @@
 
     <p>아래와 같이, <i>Java</i>와 같은 Class 스타일의 <b>OOP<sup>Object-Oriented&nbsp;Programming</sup></b> 언어는 프로그램을 만들기 위해 직접 생성자를
         호출해 객체를 생성해야 합니다.</p>
+
     <code-block>
         <pre><code class="hljs language_java" lang="Java">public class TheClass { ... }
 
@@ -23,11 +125,14 @@ public static void main(String[] args) {
      /* ... */
 }</code></pre>
     </code-block>
+
     <p>하지만 IoC 프레임워크 환경에서는 조금 다릅니다. <i>Smoodi</i>를 예로 들면, 아래와 같이 코드를 적으면 됩니다.</p>
+
     <code-block>
         <pre><code class="hljs language_java" lang="Java">@Module
 public class TheClass { ... }</code></pre>
     </code-block>
+
     <p>가장 눈에 띄는 차이점은 <c>@Module</c> 어노테이션입니다.</p>
     <p><i>Smoodi</i>에서는 <c>@Module</c> 어노테이션을 통해 프레임워크에게 개발자 대신 이 객체를 관리하라고 지정할 수 있습니다.</p>
     <p>그 덕분에 다른 메소드에서 생성자를 호출할 필요도 없습니다. 심지어 능동적으로 자신의 역할에 맞게 동작합니다.</p>
