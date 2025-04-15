@@ -58,7 +58,7 @@ function inner(tag) {
     document.body.appendChild(inner);
 
     inner.style.height = (window.innerHeight - 80) + "px";
-    inner.style.background = `center center / cover no-repeat url(${location.pathname}${tag.getAttribute("src")}.png)`;
+    inner.style.background = `center center / cover no-repeat url(${location.pathname}${tag.getAttribute("src")})`;
     inner.style.zIndex = "1";
 }
 
