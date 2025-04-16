@@ -89,7 +89,7 @@
         use.</p>
     <p>In this context, the interface <code>Pickaxe</code> is the 'single type',
         and its implementations—<code>WoodenPickaxe</code>, <code>StonePickaxe</code>, and <code>IronPickaxe</code>—are
-        the 'sub-modules'.
+        the 'submodules'.
         Choosing one for mining implies that some other module depends on <code>Pickaxe</code>.
     </p>
     <p>This feature is also useful when you want to <b>provide a substitute module</b> instead of the original one,
@@ -158,7 +158,7 @@ public @interface Module { /* ... */ }
         which is mentioned below.</p>
     <p>There are three parameters, and in most cases, the default settings are sufficient.</p>
     <p>All parameter types registered in the module's constructor, i.e., the dependent types, must have this annotation
-        attached. It is acceptable to refer to interfaces <sup>interface</sup> or abstract&nbsp;classes<sup>abstract&nbsp;class</sup>.
+        attached. It is acceptable to refer to interfaces or abstract&nbsp;classes.
     </p>
     <p>This is to prevent referencing things that are not modules <sub>ex&nbsp;-&nbsp;<c>int</c>,&nbsp;<c>String</c>&nbsp;etc.</sub>.
     </p>
