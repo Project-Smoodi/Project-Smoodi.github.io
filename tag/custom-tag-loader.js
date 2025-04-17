@@ -1,4 +1,4 @@
-import {rand, setHTMLContent} from "/contentLoader.js";
+import {setHTMLContent} from "/contentLoader.js";
 import {loadHeader} from "/tag/header/script.js";
 import {applyLanguageConfig} from "/language.js";
 import {loadCodeBlock} from "/tag/code/script.js";
@@ -10,26 +10,26 @@ import {settingBackgroundImage} from "/tag/background-image/script.js";
 export async function loadCustomTags() {
 
     document.querySelectorAll("unsupported").forEach(await async function () {
-        await setHTMLContent(`/error/unsupported-language.html?v=${rand}`, "main");
+        await setHTMLContent("/error/unsupported-language.html", "main");
     });
 
     if (document.querySelector("info")) {
-        await setHTMLContent(`/tag/info/content.html?v=${rand}`, "info");
+        await setHTMLContent("/tag/info/content.html", "info");
         loadInfo();
     }
 
     if (document.querySelector("document-table")) {
-        await setHTMLContent(`/tag/document-table/content.html?v=${rand}`, "document-table");
+        await setHTMLContent("/tag/document-table/content.html", "document-table");
         loadFolderNames();
     }
 
     document.querySelectorAll("content-table").forEach(await async function () {
-        await setHTMLContent(`/tag/content-table/content.html?v=${rand}`, "content-table");
+        await setHTMLContent("/tag/content-table/content.html", "content-table");
         loadSidebarContents();
     });
 
     if (document.querySelector("header") != null) {
-        await setHTMLContent(`/tag/header/content.html?v=${rand}`, "header");
+        await setHTMLContent("/tag/header/content.html", "header");
         loadHeader();
     }
 

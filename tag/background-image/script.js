@@ -1,5 +1,3 @@
-import {rand} from "/contentLoader.js";
-
 export let tags;
 let main;
 
@@ -60,7 +58,7 @@ function inner(tag) {
     document.body.appendChild(inner);
 
     inner.style.height = (window.innerHeight - 80) + "px";
-    inner.style.background = `center center / cover no-repeat url(${location.pathname}${tag.getAttribute("src")}.png?v=${rand})`;
+    inner.style.background = `center center / cover no-repeat url(${location.pathname}${tag.getAttribute("src")}.png)`;
     inner.style.zIndex = "1";
 }
 
