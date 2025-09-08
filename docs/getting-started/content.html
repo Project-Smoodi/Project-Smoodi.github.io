@@ -5,160 +5,179 @@
 
     <quote>
         <p>The current Smoodi framework is incomplete.</p>
-        <p>The Smoodi-Web framework has not been developed to operational levels.</p>
-        <p>This document is a temporary Smoodi-Web Guide document.</p>
+        <p>The framework is functional, but contains many bugs and is still under development.</p>
     </quote>
 
     <h2>Adding Smoodi Dependencies</h2>
     <p>To add Smoodi to your project, include the following dependency in your <c>dependencies</c> block.</p>
-    <p>Replace <c>version</c> with the desired Smoodi version.</p>
+    <p>Replace '<c>version</c>' with the desired Smoodi version.</p>
 
     <code-block group="1">
-        <pre><code class="hljs language-gradle" lang="Groovy (Gradle)">
+        <pre><code class="hljs language-gradle" lang="Gradle (Groovy)">
 dependencies {
-    implementation 'org.smoodi.framework:smoodi-web:version'
+    implementation 'org.smoodi.web:smoodi-web:version'
 }
         </code></pre>
-        <pre><code class="hljs language-kotlin" lang="Kotlin DSL">
+        <pre><code class="hljs language-kotlin" lang="Gradle (Kotlin DSL)">
 dependencies {
-    implementation("org.smoodi.framework:smoodi-web:version")
+    implementation("org.smoodi.web:smoodi-web:version")
 }
+        </code></pre>
+        <pre><code class="hljs language-gradle" lang="Maven (XML)">
+<dependency>
+    <groupId>org.smoodi.web</groupId>
+    <artifactId>smoodi-web</artifactId>
+    <version>version</version>
+</dependency>
         </code></pre>
     </code-block>
 
     <h2>Configuring the Smoodi Repository</h2>
-    <p>Smoodi is distributed via <b>GitHub Packages</b>.</p>
-    <p>Add the repository to your <c>repositories</c> block.</p>
+    <p>Smoodi is distributed via <b>Maven Central</b>.</p>
+    <p>Configure the repository to your <c>repositories</c> block.</p>
 
     <code-block group="1">
-        <pre><code class="hljs language-gradle" lang="Groovy (Gradle)">
+        <pre><code class="hljs language-gradle" lang="Gradle (Groovy)">
 repositories {
-    maven {
-        name = 'GitHubPackages'
-        url = 'https://maven.pkg.github.com/Project-Smoodi/Smoodi-Core'
-        credentials {
-            username = project.findProperty('gpr.user') // GitHub username, set via Gradle properties
-            password = System.getenv('TOKEN') // GHP token with 'read:packages' permission, set via environment variables
-        }
-    }
-    mavenCentral() // Include if you need dependencies from Maven Central.
+    mavenCentral() // Most Java (JVM) projects, including Smoodi, are distributed via Maven Central.
+                   // IDE-created projects often include this configuration by default.
 }
         </code></pre>
-        <pre><code class="hljs language-kotlin" lang="Kotlin DSL">
+        <pre><code class="hljs language-kotlin" lang="Gradle (Kotlin DSL)">
 repositories {
-    maven {
-        name = "GitHubPackages"
-        url = uri("https://maven.pkg.github.com/Project-Smoodi/Smoodi-Core")
-        credentials {
-            username = project.findProperty("gpr.user") // GitHub username, set via Gradle properties
-            password = System.getenv("TOKEN") // GHP token with 'read:packages' permission, set via environment variables
-        }
-    }
-    mavenCentral() // Include if you need dependencies from Maven Central.
+    mavenCentral() // Most Java (JVM) projects, including Smoodi, are distributed via Maven Central.
+                   // IDE-created projects often include this configuration by default.
 }
+        </code></pre>
+        <pre><code class="hljs language-gradle" lang="Maven (XML)">
+<repositories>
+    <repository>
+        <id>central</id> <!-- Most Java (JVM) projects, including Smoodi, are distributed via Maven Central. -->
+        <url>https://repo.maven.apache.org/maven2</url> <!-- IDE-created projects often include this configuration by default. -->
+    </repository>
+</repositories>
         </code></pre>
     </code-block>
 
-    <p>The credentials section provides authentication for accessing GitHub Packages.</p>
+    <h2>Creating the Main Class</h2>
+    <p>Create the main class to start the framework as shown below.</p>
 
-    <ul>
-        <li>username: Your GitHub username.</li>
-        <li>password: A GitHub token (GHP token) with the read:packages permission.</li>
-    </ul>
+    <pre><code class="hljs language_java" lang="Java">
+public class MainClass {
+    public static void main(String[] args) {
+        SmoodiFramework.startSmoodi(MainClass.class);
+    }
+}
+    </code></pre>
+    <pre><code class="hljs language_kotlin" lang="Kotlin">
+class MainClass {
+}
+fun main() { // In Kotlin, the main function is independent of the class, but a main class is still needed for technical reasons.
+    SmoodiFramework.startSmoodi(MainClass::class.java)
+}
+    </code></pre>
 
-    <quote>
-        <h3>⚠️ Security Tip</h3>
-        <p>Avoid hardcoding credentials. Use <b>Gradle properties</b>
-            <c>(gradle.properties)</c>
-            or system
-            <b>environment variables</b> for security.
-        </p>
-    </quote>
-
-    <p>For details on generating a GHP token, refer to the
-        <a class="link"
-           href="https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens">GitHub
-            documentation</a>.</p>
-
-    <h2>Running Gradle</h2>
-
-    <p>Once the dependencies are configured, download them by running the following command in your project’s root
-        directory:</p>
-
-    <code-block>
-        <pre><code lang="bash">./gradlew</code></pre>
-    </code-block>
+    <h2>Running the Project</h2>
+    <p>Now, run the project. You can run it from your IDE or use the terminal with the command <c>./gradlew run</c> or <c>mvn exec:java</c>.</p>
+    <p>If it runs successfully, you should see logs similar to the following. The actual logs will be longer and more complex.</p>
+    <pre><code class="hljs language_plain" lang="Plain Text">
+2025-09-08 14:41:30.545 INFO  [Test worker         ] org.smoodi.core.SmoodiFramework        :: org.smoodi.core.SmoodiFramework was initialized
+2025-09-08 14:41:30.549 DEBUG [Test worker         ] org.smoodi.core.SmoodiFramework        :: org.smoodi.core.SmoodiFramework was initialized
+2025-09-08 14:41:30.549 INFO  [Test worker         ] org.smoodi.core.SmoodiFramework        :: org.smoodi.core.SmoodiCoreProcessor was initialized
+2025-09-08 14:41:30.552 INFO  [Test worker         ] org.smoodi.core.SmoodiFramework        :: org.smoodi.core.module.container.ModuleContainer was initialized
+2025-09-08 14:41:30.553 INFO  [Test worker         ] o.s.c.m.loader.ModuleLoaderComposite   :: Module Loader :: Module loading started at 2025-09-08T14:41:30.553390
+2025-09-08 14:41:30.557 INFO  [Test worker         ] o.s.c.m.l.DefaultStaticModuleLoader    :: Module Loader :: Statically-Initialized "2" Modules are loaded.
+2025-09-08 14:41:43.350 INFO  [Test worker         ] o.s.c.m.l.DefaultModuleClassScanner    :: Scan 0 modules with basePackage: "org.smoodi"
+    </code></pre>
 </en>
 <ko>
     <info title="Smoodi 시작하기"
           year="2024" month="12" day="8" hour="1"></info>
 
     <quote>
-        <p>현재 Smoodi 프레임워크는 미완성된 상태입니다.</p>
-        <p>Smoodi-Web 프레임워크는 동작 가능한 수준까지 개발되지 않았습니다.</p>
-        <p>해당 문서는 임시적으로 작성된 Smoodi-Web 가이드 문서입니다.</p>
+        <p>현재 Smoodi 프레임워크는 완성된 상태는 아닙니다.</p>
+        <p>프레임워크는 동작 가능하지만, 많은 오류가 있으며 계속 개발해나가는 중입니다.</p>
     </quote>
 
     <h2>Smoodi 의존성 설정</h2>
-    <p><c>dependencies</c> 블록에 아래와 같이 Smoodi 의존성을 추가합니다. <c>version</c> 위치에는 팀에서 요구하는 Smoodi 버전을 입력합니다.</p>
+    <p><c>dependencies</c> 블록에 아래와 같이 Smoodi 의존성을 추가합니다. <c>version</c> 위치에는 프로젝트에서 요구하는 Smoodi 버전을 입력합니다.</p>
 
     <code-block group="1">
-        <pre><code class="hljs language-gradle" lang="Groovy (Gradle)">
+        <pre><code class="hljs language-gradle" lang="Gradle (Groovy)">
 dependencies {
-    implementation 'org.smoodi.framework:smoodi-web:version'
+    implementation 'org.smoodi.web:smoodi-web:version'
 }
         </code></pre>
-        <pre><code class="hljs language-kotlin" lang="Kotlin DSL">
+        <pre><code class="hljs language-kotlin" lang="Gradle (Kotlin DSL)">
 dependencies {
-    implementation("org.smoodi.framework:smoodi-web:version")
+    implementation("org.smoodi.web:smoodi-web:version")
 }
+        </code></pre>
+        <pre><code class="hljs language-gradle" lang="Maven (XML)">
+<dependency>
+    <groupId>org.smoodi.web</groupId>
+    <artifactId>smoodi-web</artifactId>
+    <version>version</version>
+</dependency>
         </code></pre>
     </code-block>
 
     <h2>Smoodi Repository 추가</h2>
-    <p>Smoodi는 <b>Github Packages</b>를 통해 배포되어 있습니다.</p>
-    <p>아래와 같이 Smoodi의 <b>Github Packages Repository</b>를 <c>repositories</c> 블록에 추가합니다.</p>
+    <p>Smoodi는 <b>Maven Central</b>에 배포되어 있습니다.</p>
+    <p>아래와 같이 Smoodi의 <b>Maven Central</b>을 <c>repositories</c> 블록에 추가합니다.</p>
 
     <code-block group="1">
-        <pre><code class="hljs language-gradle" lang="Groovy (Gradle)">
+        <pre><code class="hljs language-gradle" lang="Gradle (Groovy)">
 repositories {
-    maven {
-        name = 'GitHubPackages'
-        url = 'https://maven.pkg.github.com/Project-Smoodi/Smoodi-Core'
-        credentials {
-            username = project.findProperty('gpr.user') // Github 유저 이름, Gradle 환경 변수를 이용한 설정
-            password = System.getenv('TOKEN') // 'read:packages' 권한이 활성화된 GHP 토큰, 시스템 환경 변수를 이용한 설정
-        }
-    }
-    mavenCentral() // Maven Repository를 통해 배포된 다른 의존성을 의존하기 위해 필요합니다. 대다수의 경우 필요하지만, 필요하지 않을 경우 제거하세요.
+    mavenCentral() // Smoodi를 포함해, 대부분의 Java(JVM) 프로젝트는 Maven Central을 통해 배포됩니다.
+                   // IDE로 만든 프로젝트는 기본적으로 이 구성을 포함하기도 합니다.
 }
         </code></pre>
-        <pre><code class="hljs language-kotlin" lang="Kotlin DSL">
+        <pre><code class="hljs language-kotlin" lang="Gradle (Kotlin DSL)">
 repositories {
-    maven {
-        name = "GitHubPackages"
-        url = uri("https://maven.pkg.github.com/Project-Smoodi/Smoodi-Core")
-        credentials {
-            username = project.findProperty("gpr.user") // Github 유저 이름, Gradle 환경 변수를 이용한 설정
-            password = System.getenv("TOKEN") // 'read:packages' 권한이 활성화된 GHP 토큰, 시스템 환경 변수를 이용한 설정
-        }
-    }
-    mavenCentral() // Maven Repository를 통해 배포된 다른 의존성을 의존하기 위해 필요합니다. 대다수의 경우 필요하지만, 필요하지 않을 경우 제거하세요.
+    mavenCentral() // Smoodi를 포함해, 대부분의 Java(JVM) 프로젝트는 Maven Central을 통해 배포됩니다.
+                   // IDE로 만든 프로젝트는 기본적으로 이 구성을 포함하기도 합니다.
 }
+        </code></pre>
+        <pre><code class="hljs language-gradle" lang="Maven (XML)">
+<repositories>
+    <repository>
+        <id>central</id> <!-- Smoodi를 포함해, 대부분의 Java(JVM) 프로젝트는 Maven Central을 통해 배포됩니다. -->
+        <url>https://repo.maven.apache.org/maven2</url> <!-- IDE로 만든 프로젝트는 이러한 구성을 기본적으로 포함하기도 합니다. -->
+    </repository>
+</repositories>
         </code></pre>
     </code-block>
 
-    <p><c>repositories > maven > credentials</c> 영역은 <b>Github 계정 인증</b>을 위한 인증 정보를 기입하는 곳입니다.</p>
-    <p><i>Github Packages</i>는 패키지(Smoodi처럼, 온라인 저장소에 배포된 프로젝트들)에 접근하기 위해 Github 계정 인증이 필요합니다.</p>
-    <p><c>username</c> 위치엔 사용자의 Github 이름, <c>password</c> 위치엔 Github 계정의 정보를 담은 Github 토큰(GHP 토큰)을 입력합니다.</p>
-    <p>이 부분은 다른 사용자에게 노출되어서는 안되며, 위 코드 블럭에 제시된 것처럼 '<b>Gradle 환경 변수</b> (<c>gradle.properties</c> 파일)' 또는 '<b>시스템 환경
-        변수</b>'를 이용해 설정하기를 <b>권고</b>합니다.</p>
+    <h2>메인 클래스 작성</h2>
+    <p>아래와 같이 프레임워크를 시작하기 위한 메인 클래스를 작성합니다.</p>
 
-    <quote>
-        <p>GHP 토큰 발급은 아래의 문서를 참고해주세요.</p>
-        <a class="link"
-           href="https://docs.github.com/ko/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens">Github
-            docs</a>
-    </quote>
+    <pre><code class="hljs language_java" lang="Java">
+public class MainClass {
+    public static void main(String[] args) {
+        SmoodiFramework.startSmoodi(MainClass.class);
+    }
+}
+    </code></pre>
+    <pre><code class="hljs language_kotlin" lang="Kotlin">
+class MainClass {
+}
 
+fun main() { // Kotlin에서는 main 함수가 클래스와 독립적이지만, 기술적인 이유로 메인 클래스는 여전히 필요합니다.
+    SmoodiFramework.startSmoodi(MainClass::class.java)
+}
+    </code></pre>
+
+    <h2>프로젝트 실행</h2>
+    <p>이제 프로젝트를 실행합니다. IDE에서 실행하거나, 터미널에서 <c>./gradlew run</c> 혹은 <c>mvn exec:java</c> 명령어로 실행할 수 있습니다.</p>
+    <p>만약 정상적으로 실행되었다면 아래와 유사한 로그가 표시됩니다. 실제로는 더 길고, 복잡합니다.</p>
+    <pre><code class="hljs language_plain" lang="Plain Text">
+2025-09-08 14:41:30.545 INFO  [Test worker         ] org.smoodi.core.SmoodiFramework        :: org.smoodi.core.SmoodiFramework was initialized
+2025-09-08 14:41:30.549 DEBUG [Test worker         ] org.smoodi.core.SmoodiFramework        :: org.smoodi.core.SmoodiFramework was initialized
+2025-09-08 14:41:30.549 INFO  [Test worker         ] org.smoodi.core.SmoodiFramework        :: org.smoodi.core.SmoodiCoreProcessor was initialized
+2025-09-08 14:41:30.552 INFO  [Test worker         ] org.smoodi.core.SmoodiFramework        :: org.smoodi.core.module.container.ModuleContainer was initialized
+2025-09-08 14:41:30.553 INFO  [Test worker         ] o.s.c.m.loader.ModuleLoaderComposite   :: Module Loader :: Module loading started at 2025-09-08T14:41:30.553390
+2025-09-08 14:41:30.557 INFO  [Test worker         ] o.s.c.m.l.DefaultStaticModuleLoader    :: Module Loader :: Statically-Initialized "2" Modules are loaded.
+2025-09-08 14:41:43.350 INFO  [Test worker         ] o.s.c.m.l.DefaultModuleClassScanner    :: Scan 0 modules with basePackage: "org.smoodi"
+    </code></pre>
 </ko>
