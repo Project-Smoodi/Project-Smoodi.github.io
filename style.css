@@ -38,6 +38,17 @@ body {
     visibility: hidden;
 }
 
+/* Firefox */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.2) #222222;
+}
+
+* {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+}
+
 main {
     z-index: 100;
 
