@@ -24,11 +24,11 @@ dependencies {
 }
         </code></pre>
         <pre><code class="hljs language-gradle" lang="Maven (XML)">
-<dependency>
-    <groupId>org.smoodi.web</groupId>
-    <artifactId>smoodi-web</artifactId>
-    <version>version</version>
-</dependency>
+&lt;dependency&gt;
+    &lt;groupId&gt;org.smoodi.web&lt;/groupId&gt;
+    &lt;artifactId&gt;smoodi-web&lt;/artifactId&gt;
+    &lt;version&gt;version&lt;/version&gt;
+&lt;/dependency&gt;
         </code></pre>
     </code-block>
 
@@ -50,18 +50,19 @@ repositories {
 }
         </code></pre>
         <pre><code class="hljs language-gradle" lang="Maven (XML)">
-<repositories>
-    <repository>
-        <id>central</id> <!-- Most Java (JVM) projects, including Smoodi, are distributed via Maven Central. -->
-        <url>https://repo.maven.apache.org/maven2</url> <!-- IDE-created projects often include this configuration by default. -->
-    </repository>
-</repositories>
+&lt;repositories&gt;
+    &lt;repository&gt;
+        &lt;id&gt;central&lt;/id&gt; &lt;!-- Most Java (JVM) projects, including Smoodi, are distributed via Maven Central. --&gt;
+        &lt;url&gt;https://repo.maven.apache.org/maven2&lt;/url&gt; &lt;!-- IDE-created projects often include this configuration by default. --&gt;
+    &lt;/repository&gt;
+&lt;/repositories&gt;
         </code></pre>
     </code-block>
 
     <h2>Creating the Main Class</h2>
     <p>Create the main class to start the framework as shown below.</p>
 
+    <code-block>
     <pre><code class="hljs language_java" lang="Java">
 public class MainClass {
     public static void main(String[] args) {
@@ -76,11 +77,13 @@ fun main() { // In Kotlin, the main function is independent of the class, but a 
     SmoodiFramework.startSmoodi(MainClass::class.java)
 }
     </code></pre>
+    </code-block>
 
     <h2>Running the Project</h2>
     <p>Now, run the project. You can run it from your IDE or use the terminal with the command <c>./gradlew run</c> or <c>mvn exec:java</c>.</p>
     <p>If it runs successfully, you should see logs similar to the following. The actual logs will be longer and more complex.</p>
-    <pre><code class="hljs language_plain" lang="Plain Text">
+    <code-block>
+        <pre><code class="hljs language_plain" lang="Shell">
 2025-09-08 14:41:30.545 INFO  [Test worker         ] org.smoodi.core.SmoodiFramework        :: org.smoodi.core.SmoodiFramework was initialized
 2025-09-08 14:41:30.549 DEBUG [Test worker         ] org.smoodi.core.SmoodiFramework        :: org.smoodi.core.SmoodiFramework was initialized
 2025-09-08 14:41:30.549 INFO  [Test worker         ] org.smoodi.core.SmoodiFramework        :: org.smoodi.core.SmoodiCoreProcessor was initialized
@@ -88,7 +91,8 @@ fun main() { // In Kotlin, the main function is independent of the class, but a 
 2025-09-08 14:41:30.553 INFO  [Test worker         ] o.s.c.m.loader.ModuleLoaderComposite   :: Module Loader :: Module loading started at 2025-09-08T14:41:30.553390
 2025-09-08 14:41:30.557 INFO  [Test worker         ] o.s.c.m.l.DefaultStaticModuleLoader    :: Module Loader :: Statically-Initialized "2" Modules are loaded.
 2025-09-08 14:41:43.350 INFO  [Test worker         ] o.s.c.m.l.DefaultModuleClassScanner    :: Scan 0 modules with basePackage: "org.smoodi"
-    </code></pre>
+        </code></pre>
+    </code-block>
 </en>
 <ko>
     <info title="Smoodi 시작하기"
@@ -114,11 +118,11 @@ dependencies {
 }
         </code></pre>
         <pre><code class="hljs language-gradle" lang="Maven (XML)">
-<dependency>
-    <groupId>org.smoodi.web</groupId>
-    <artifactId>smoodi-web</artifactId>
-    <version>version</version>
-</dependency>
+&lt;dependency&gt;
+    &lt;groupId&gt;org.smoodi.web&lt;/groupId&gt;
+    &lt;artifactId&gt;smoodi-web&lt;/artifactId&gt;
+    &lt;version&gt;version&lt;/version&gt;
+&lt;/dependency&gt;
         </code></pre>
     </code-block>
 
@@ -140,38 +144,41 @@ repositories {
 }
         </code></pre>
         <pre><code class="hljs language-gradle" lang="Maven (XML)">
-<repositories>
-    <repository>
-        <id>central</id> <!-- Smoodi를 포함해, 대부분의 Java(JVM) 프로젝트는 Maven Central을 통해 배포됩니다. -->
-        <url>https://repo.maven.apache.org/maven2</url> <!-- IDE로 만든 프로젝트는 이러한 구성을 기본적으로 포함하기도 합니다. -->
-    </repository>
-</repositories>
+&lt;repositories&gt;
+    &lt;repository&gt;
+        &lt;id&gt;central&lt;/id&gt; &lt;!-- Smoodi를 포함해, 대부분의 Java(JVM) 프로젝트는 Maven Central을 통해 배포됩니다. --&gt;
+        &lt;url&gt;https://repo.maven.apache.org/maven2&lt;/url&gt; &lt;!-- IDE로 만든 프로젝트는 이러한 구성을 기본적으로 포함하기도 합니다. --&gt;
+    &lt;/repository&gt;
+&lt;/repositories&gt;
         </code></pre>
     </code-block>
 
     <h2>메인 클래스 작성</h2>
     <p>아래와 같이 프레임워크를 시작하기 위한 메인 클래스를 작성합니다.</p>
 
-    <pre><code class="hljs language_java" lang="Java">
+    <code-block>
+        <pre><code class="hljs language_java" lang="Java">
 public class MainClass {
     public static void main(String[] args) {
         SmoodiFramework.startSmoodi(MainClass.class);
     }
 }
-    </code></pre>
-    <pre><code class="hljs language_kotlin" lang="Kotlin">
+        </code></pre>
+        <pre><code class="hljs language_kotlin" lang="Kotlin">
 class MainClass {
 }
 
 fun main() { // Kotlin에서는 main 함수가 클래스와 독립적이지만, 기술적인 이유로 메인 클래스는 여전히 필요합니다.
     SmoodiFramework.startSmoodi(MainClass::class.java)
 }
-    </code></pre>
+        </code></pre>
+    </code-block>
 
     <h2>프로젝트 실행</h2>
     <p>이제 프로젝트를 실행합니다. IDE에서 실행하거나, 터미널에서 <c>./gradlew run</c> 혹은 <c>mvn exec:java</c> 명령어로 실행할 수 있습니다.</p>
     <p>만약 정상적으로 실행되었다면 아래와 유사한 로그가 표시됩니다. 실제로는 더 길고, 복잡합니다.</p>
-    <pre><code class="hljs language_plain" lang="Plain Text">
+    <code-block>
+        <pre><code class="hljs language_plain" lang="Shell">
 2025-09-08 14:41:30.545 INFO  [Test worker         ] org.smoodi.core.SmoodiFramework        :: org.smoodi.core.SmoodiFramework was initialized
 2025-09-08 14:41:30.549 DEBUG [Test worker         ] org.smoodi.core.SmoodiFramework        :: org.smoodi.core.SmoodiFramework was initialized
 2025-09-08 14:41:30.549 INFO  [Test worker         ] org.smoodi.core.SmoodiFramework        :: org.smoodi.core.SmoodiCoreProcessor was initialized
@@ -179,5 +186,6 @@ fun main() { // Kotlin에서는 main 함수가 클래스와 독립적이지만, 
 2025-09-08 14:41:30.553 INFO  [Test worker         ] o.s.c.m.loader.ModuleLoaderComposite   :: Module Loader :: Module loading started at 2025-09-08T14:41:30.553390
 2025-09-08 14:41:30.557 INFO  [Test worker         ] o.s.c.m.l.DefaultStaticModuleLoader    :: Module Loader :: Statically-Initialized "2" Modules are loaded.
 2025-09-08 14:41:43.350 INFO  [Test worker         ] o.s.c.m.l.DefaultModuleClassScanner    :: Scan 0 modules with basePackage: "org.smoodi"
-    </code></pre>
+        </code></pre>
+    </code-block>
 </ko>
