@@ -1,11 +1,27 @@
 @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css");
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
 
+:root {
+    --jetbrains-mono: 400 "JetBrains Mono", ui-monospace;
+
+    --font-pretendard: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+
+    --pretendard-thin: 100 var(--font-pretendard);
+    --pretendard-extra-light: 200 var(--font-pretendard);
+    --pretendard-light: 300 var(--font-pretendard);
+    --pretendard-regular: 400 var(--font-pretendard);
+    --pretendard-medium: 500 var(--font-pretendard);
+    --pretendard-semi-bold: 600 var(--font-pretendard);
+    --pretendard-bold: 700 var(--font-pretendard);
+    --pretendard-extra-bold: 800 var(--font-pretendard);
+    --pretendard-black: 900 var(--font-pretendard);
+}
+
 * {
     padding: 0;
     margin: 0;
 
-    font-family: "Pretendard Variable", "Inter", sans-serif;
+    font: var(--pretendard-regular);
     font-size: 16px;
     color: #eeeeee;
     white-space: normal;
@@ -34,7 +50,8 @@ c {
     margin: 0 3px 0 0;
     background-color: #333333;
     border-radius: 5px;
-    font-family: "JetBrains Mono", ui-monospace;
+
+    font: var(--jetbrains-mono);
     font-size: 16px;
 }
 

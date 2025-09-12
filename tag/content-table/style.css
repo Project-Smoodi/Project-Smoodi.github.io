@@ -42,7 +42,7 @@ content-table::-webkit-scrollbar-button, content-table::-webkit-scrollbar-corner
     padding: 10px;
     border-radius: 10px;
 
-    font-family: "Pretendard SemiBold";
+    font: var(--pretendard-semi-bold);
     line-height: 120%;
 
     transition: 0.5s;

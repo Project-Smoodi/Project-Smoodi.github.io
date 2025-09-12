@@ -35,8 +35,8 @@ code-block {
     border-radius: 10px 10px 0 0;
     background-color: #333333;
 
+    font: var(--jetbrains-mono);
     font-size: 16px;
-    font-family: "JetBrains Mono";
 }
 
 .code-block-button:hover {
@@ -54,7 +54,7 @@ code {
     width: auto;
 
     border-radius: 0 0 10px 10px;
-    font-family: "JetBrains Mono", ui-monospace;
+    font: var(--jetbrains-mono);
     font-size: 16px;
     white-space: pre;
 }
@@ -64,7 +64,7 @@ pre code.hljs {
 }
 
 code * {
-    font-family: "JetBrains Mono", ui-monospace;
+    font: var(--jetbrains-mono);
     font-size: 16px;
     white-space: pre;
 }

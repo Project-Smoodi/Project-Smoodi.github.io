@@ -13,14 +13,14 @@ info {
 }
 
 .info-title {
+    font: var(--pretendard-light);
     font-size: 40px;
-    font-family: "Pretendard Light";
     word-break: keep-all;
 }
 
 .info-description {
+    font: var(--pretendard-regular);
     font-size: 24px;
-    font-family: "Pretendard";
     color: #bbbbbb;
 }
 
